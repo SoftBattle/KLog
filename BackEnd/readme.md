@@ -1,3 +1,0 @@
-trunk用于开发
-cranches用于修复bug和推出release版本
-（课设就不推出稳定版了，没有tags）
