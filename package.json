@@ -1,0 +1,41 @@
+{
+  "name": "klog",
+  "version": "1.0.0",
+  "description": "大软设计课程项目",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SoftBattle/KLog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SoftBattle/KLog/issues"
+  },
+  "homepage": "https://github.com/SoftBattle/KLog#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "next": "^11.1.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.5",
+    "redux": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.16",
+    "@types/react-dom": "^17.0.9",
+    "cross-env": "^7.0.3",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.0.1",
+    "typescript": "4.3.5"
+  }
+}
