@@ -1,7 +1,10 @@
 import React from 'react'
+// import Layout from '../layout'
 
 const Index = () => {
-  return <div>hello world!</div>
+  return (
+    <div>first page</div>
+  )
 }
 
 export default Index
