@@ -13,11 +13,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <Fragment>
       <Head>
-        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="shortcut icon" href="/k.svg" />
       </Head>
-      {/* <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider> */}
       <Provider store={store}>
         <Layout>
           <Component {...pageProps} />

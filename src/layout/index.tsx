@@ -1,6 +1,7 @@
 // import { ReactNode } from 'hoist-non-react-statics/node_modules/@types/react'
 import React, { Fragment, ReactNode } from 'react'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 const Layout = ({ children }: {
   children: ReactNode
@@ -8,9 +9,12 @@ const Layout = ({ children }: {
   return (
     <Fragment>
       <Header></Header>
-      {
-        children
-      }
+      <div className="wrapper">
+        {
+          children
+        }
+      </div>
+      <Footer></Footer>
     </Fragment>
   )
 }

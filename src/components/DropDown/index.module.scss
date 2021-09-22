@@ -1,0 +1,24 @@
+.dropdown {
+  position: absolute;
+  box-sizing: border-box;
+  width: 160px;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 3px;
+  border: 1px solid #333333;
+  color: #333333;
+  overflow: hidden;
+  padding: 12px 0;
+  .dropdown_item {
+    padding: 4px 8px 4px 16px;
+    display: block;
+    &:hover {
+      background: #f1f1f1;
+    }
+  }
+  z-index: 1000;
+}
+
+.dropdown.collapsed {
+  display: none;
+}
