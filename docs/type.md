@@ -9,13 +9,13 @@
     followers: '关注我的人',
     follows: '我关注的',
     stars: '文章收藏',
-    articles: '我的文章',
+    posts: '我的文章',
 ```
 
-文章相关的键：
+文章(post)相关的键：
 
 ```
-aid: 文章id
+pid: 文章id
 author: 作者
 title: 文章标题
 subTitle: 副标题
@@ -41,8 +41,8 @@ mtime: 最近编辑时间，date
 2. 文章基础信息，不包含content
 
    ```ts
-   interface ArticleBasicInfo {
-       aid: string
+   interface PostBasicInfo {
+       pid: string
        title: string
        subTitle: string
        banners: string[]
@@ -56,8 +56,8 @@ mtime: 最近编辑时间，date
 3. 文章详细信息，包含content与收藏信息
 
    ```ts
-   interface Article {
-       aid: string
+   interface Post {
+       pid: string
        authour: string
        title: string
        subTitle: string
@@ -74,7 +74,7 @@ mtime: 最近编辑时间，date
 4. 新建文章
 
    ```ts
-   interface NewArticle {
+   interface NewPost {
    	title: string
        subTitle: string
        content: string

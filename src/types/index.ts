@@ -4,8 +4,8 @@ export interface BaseResponse {
   data: any
 }
 
-export interface ArticleInfo {}
+export interface postInfo {}
 
-export interface ArticleDetail {}
+export interface postDetail {}
 
 export interface UserInfo {}

@@ -484,7 +484,7 @@ post /api/user/stars
 	data: {
 		items: [
 			{
-                aid: 'jiwjisw',
+                pid: 'jiwjisw',
                 title: 'readme',
                 authour: 'cmkk',
                 subTitle: '说明',
@@ -515,7 +515,7 @@ post /api/user/stars
 ### 2.8 获取用户文章
 
 ```
-post /api/user/articles
+post /api/user/posts
 ```
 
 #### 请求参数：
@@ -549,7 +549,7 @@ post /api/user/articles
 	data: {
 		items: [
 			{
-                aid: 'jiwjisw',
+                pid: 'jiwjisw',
                 authour: 'cmkk',
                 title: 'readme',
                 subTitle: '说明',
@@ -671,7 +671,7 @@ post /api/user/unfollow
 ### 3.1 预览/浏览文章
 
 ```
-get /api/article/:aid
+get /api/post/:pid
 ```
 
 #### 请求参数：
@@ -681,10 +681,10 @@ get /api/article/:aid
 示例：
 
 ```
-get /api/article/hsdwuhdwu
+get /api/post/hsdwuhdwu
 ```
 
-说明：后台需要在在url中取得参数aid，以此返回对应的文章
+说明：后台需要在在url中取得参数pid，以此返回对应的文章
 
 #### 返回数据
 
@@ -694,7 +694,7 @@ get /api/article/hsdwuhdwu
 {
 	stat: 'ok',
 	data: {
-		aid: 'jiwjisw',
+		pid: 'jiwjisw',
         authour: 'cmkk',
         title: 'readme',
         subTitle: '说明',
@@ -721,7 +721,7 @@ get /api/article/hsdwuhdwu
 ### 3.2  新建文章
 
 ```
-post /api/article/new
+post /api/post/new
 ```
 
 #### 请求参数：
@@ -770,7 +770,7 @@ post /api/article/new
 ### 3.3  编辑文章
 
 ```
-put /api/article/:aid
+put /api/post/:pid
 ```
 
 #### 请求参数：
@@ -795,7 +795,7 @@ put /api/article/:aid
 }
 ```
 
-说明：解析token得到作者，判断是否有权限；在url中获取aid，找到需要更新的的文章。
+说明：解析token得到作者，判断是否有权限；在url中获取pid，找到需要更新的的文章。
 
 #### 返回数据
 
@@ -819,7 +819,7 @@ put /api/article/:aid
 ### 3.4  删除文章
 
 ```
-delete /api/article/:aid
+delete /api/post/:pid
 ```
 
 #### 请求参数：
@@ -829,10 +829,10 @@ delete /api/article/:aid
 示例：
 
 ```
-delete /api/article/djuedeuef
+delete /api/post/djuedeuef
 ```
 
-说明：解析token得到作者，在url中获取aid，判断是否具有权限删除，能则删除。
+说明：解析token得到作者，在url中获取pid，判断是否具有权限删除，能则删除。
 
 #### 返回数据
 
@@ -865,21 +865,21 @@ delete /api/article/djuedeuef
 ### 3.5  收藏文章
 
 ```
-post /api/article/unstar
+post /api/post/unstar
 ```
 
 #### 请求参数：
 
 | 参数名 | 类型   | 说明         |
 | ------ | ------ | ------------ |
-| aid    | string | 收藏的文章id |
+| pid    | string | 收藏的文章id |
 |        |        |              |
 
 示例：
 
 ```
 {
-	aid: 'wdwdwswsdw'
+	pid: 'wdwdwswsdw'
 }
 ```
 
@@ -907,21 +907,21 @@ post /api/article/unstar
 ### 3.6  取消收藏文章
 
 ```
-post /api/article/star
+post /api/post/star
 ```
 
 #### 请求参数：
 
 | 参数名 | 类型   | 说明         |
 | ------ | ------ | ------------ |
-| aid    | string | 收藏的文章id |
+| pid    | string | 收藏的文章id |
 |        |        |              |
 
 示例：
 
 ```
 {
-	aid: 'wdwdwswsdw'
+	pid: 'wdwdwswsdw'
 }
 ```
 

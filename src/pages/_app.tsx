@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from '../store/reducers'
 import Layout from '../layout'
+import '../mock'
 
 const store = createStore(rootReducer)
 
