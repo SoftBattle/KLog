@@ -26,6 +26,17 @@ body {
   /* background-color: #ffffff; */
 }
 
+.error {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  color: #c6c6c6;
+  font-size: 1.5rem;
+}
+
 @media screen and (max-width: 768px) {
   .wrapper {
     padding: 16px 16px;

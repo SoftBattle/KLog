@@ -1,9 +1,5 @@
 .footer {
-  // position: absolute;
   background: #ffffff;
-  // bottom: 0px;
-  // left: 0;
-  // right: 0;
   height: 48px;
   display: flex;
   align-items: center;
@@ -16,6 +12,7 @@
   a {
     color: #999999;
     margin: 12px;
+    text-decoration: none;
     &:visited {
       color: #666666;
     }

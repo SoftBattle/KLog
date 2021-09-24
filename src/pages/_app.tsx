@@ -14,6 +14,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <Fragment>
       <Head>
         <link rel="shortcut icon" href="/k.svg" />
+        <title>KLog, record every moment.</title>
       </Head>
       <Provider store={store}>
         <Layout>
