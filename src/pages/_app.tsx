@@ -1,16 +1,21 @@
 import '../styles/global.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import rootReducer from '../store/reducers'
+// import { getOrCreateStore } from '../store'
+// import rootReducer from '../store/reducers'
 import Layout from '../layout'
 import '../mock'
 
-const store = createStore(rootReducer)
+import { store, unsubscribe } from '../store'
 
 const App = ({ Component, pageProps }: AppProps) => {
+  useEffect(() => {
+    return () => {
+      unsubscribe()
+    }
+  }, [])
   return (
     <Fragment>
       <Head>

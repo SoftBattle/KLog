@@ -15,16 +15,11 @@ const initialUserStore = (): UserStore => {
 
 
 
-export const userStore = (state = initialUserStore(), action: USER_Action) => {
+export const userStore = (state = {}, action: USER_Action) => {
   switch(action.type) {
     case 'STORE_USER':
-      storeToLocal(__USER_STORE__, action.data)
       return action.data
     default:
       return state
   }
-}
-
-const storeToLocal = (key, data) => {
-  localStorage.setItem(key, JSON.stringify(data))
 }
