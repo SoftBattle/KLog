@@ -1,21 +1,25 @@
 import React, { Fragment, useState, useRef } from 'react'
 import style from './index.module.scss'
 import Link from 'next/link'
-import DropDown from '../DropDown'
-import Button from '../Button'
-// import Login from '../../containers/auth/login'
+import DropDown from '../../components/DropDown'
+import Button from '../../components/Button'
 import { useRouter } from 'next/router'
-import Dialog from '../Dialog'
-import AuthForm from '../../containers/Auth'
+import Dialog from '../../components/Dialog'
+import AuthForm from '../Auth'
 
-const Header = ({ avatar, uid, nickname }: {
+import { connect } from 'react-redux'
+import { UserStore } from '../../store/user/actions'
+
+const Header = ({ avatar, uid, nickname, token }: {
   avatar?: string
   uid?: string
   nickname?: string
+  token?: string
 }) => {
   const [active, setActive] = useState(false)
-  const [collapsed, setCollapsed] = useState(true)
-  const router = useRouter()
+  const [userMenuCollapsed, setUserMenuCollapsed] = useState(true)
+  const [userActionCollapsed, setUserActionCollapsed] = useState(true)
+  // const router = useRouter()
   // const authDialogVisible = useRef(false)
   const [authDialogVisible, setAuthDialogVisible] = useState(false)
   return (
@@ -50,11 +54,24 @@ const Header = ({ avatar, uid, nickname }: {
           </div>
         {
           !!uid && <Fragment>
-            <div className={style.new_action}>
-              <svg className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4057" width="200" height="200"><path d="M127.289058 490.154459l0 43.770899c0 32.338522 27.009144 57.108672 58.774615 58.734706l233.271858 12.018731 12.005428 233.298464c1.665942 32.258705 26.396183 58.774615 58.734706 58.774615l43.770899 0c32.338522 0 57.108672-27.009144 58.734706-58.774615l12.005428-233.298464 233.351676-12.018731c31.765471-1.626034 58.774615-26.396183 58.774615-58.734706l0-43.770899c0-32.338522-26.51591-57.068763-58.774615-58.734706l-233.351676-12.005428-12.005428-233.311767c-1.626034-31.765471-26.396183-58.774615-58.734706-58.774615l-43.770899 0c-32.338522 0-57.068763 26.51591-58.734706 58.774615L419.334507 419.414325l-233.271858 12.005428C153.804968 433.085696 127.289058 457.815937 127.289058 490.154459z" p-id="4058"></path></svg>
-              <svg className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2441" width="200" height="200"><path d="M787.2 380.8c-9.6-9.6-22.4-12.8-35.2-12.8l-480 3.2c-12.8 0-25.6 3.2-35.2 12.8-19.2 19.2-19.2 48 0 67.2l240 240c3.2 3.2 9.6 6.4 12.8 9.6l3.2 3.2c16 6.4 38.4 3.2 51.2-9.6l240-243.2c22.4-22.4 19.2-51.2 3.2-70.4z" p-id="2442"></path></svg>
+            <div className={style.new_action} onClick={() => setUserActionCollapsed(!userActionCollapsed)}>
+              <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4057" width="200" height="200"><path d="M127.289058 490.154459l0 43.770899c0 32.338522 27.009144 57.108672 58.774615 58.734706l233.271858 12.018731 12.005428 233.298464c1.665942 32.258705 26.396183 58.774615 58.734706 58.774615l43.770899 0c32.338522 0 57.108672-27.009144 58.734706-58.774615l12.005428-233.298464 233.351676-12.018731c31.765471-1.626034 58.774615-26.396183 58.774615-58.734706l0-43.770899c0-32.338522-26.51591-57.068763-58.774615-58.734706l-233.351676-12.005428-12.005428-233.311767c-1.626034-31.765471-26.396183-58.774615-58.734706-58.774615l-43.770899 0c-32.338522 0-57.068763 26.51591-58.734706 58.774615L419.334507 419.414325l-233.271858 12.005428C153.804968 433.085696 127.289058 457.815937 127.289058 490.154459z" p-id="4058"></path></svg>
+              <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2441" width="200" height="200"><path d="M787.2 380.8c-9.6-9.6-22.4-12.8-35.2-12.8l-480 3.2c-12.8 0-25.6 3.2-35.2 12.8-19.2 19.2-19.2 48 0 67.2l240 240c3.2 3.2 9.6 6.4 12.8 9.6l3.2 3.2c16 6.4 38.4 3.2 51.2-9.6l240-243.2c22.4-22.4 19.2-51.2 3.2-70.4z" p-id="2442"></path></svg>
+              <DropDown
+                items={[
+                  {content: 'New post', onClick: () => {alert('new post')}}
+                ]} 
+                style={{top: '50px', right: '0'}} 
+                collapsed={userActionCollapsed}
+                >
+                <div 
+                  className={style.mask} 
+                  onClick={() => setUserActionCollapsed(true)} 
+                  ></div>
+              </DropDown>
             </div>
-            <div className={style.user} onClick={() => setCollapsed(!collapsed)}>
+
+            <div className={style.user} onClick={() => setUserMenuCollapsed(!userMenuCollapsed)}>
               <div className={style.avatar}>
                 {
                   avatar && <img src={avatar} alt="" /> || <img src="/avatar.svg" alt="" />
@@ -63,26 +80,51 @@ const Header = ({ avatar, uid, nickname }: {
               <svg className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2441" width="200" height="200"><path d="M787.2 380.8c-9.6-9.6-22.4-12.8-35.2-12.8l-480 3.2c-12.8 0-25.6 3.2-35.2 12.8-19.2 19.2-19.2 48 0 67.2l240 240c3.2 3.2 9.6 6.4 12.8 9.6l3.2 3.2c16 6.4 38.4 3.2 51.2-9.6l240-243.2c22.4-22.4 19.2-51.2 3.2-70.4z" p-id="2442"></path></svg>
               <DropDown 
                 items={[
-                  {label: 'your profile', onClick: () => {alert('profile')}},
-                  {label: 'your posts', onClick: () => {alert('posts')}},
-                  {label: 'your stars', onClick: () => {alert('stars')}},
-                  {label: 'your follows', onClick: () => {alert('follows')}},
+                  {
+                    content: <Link href={`/space/profile`}>
+                      <span>Your profile</span>
+                    </Link>, 
+                  },
+                  {
+                    content: <Link href={`/space/posts`}>
+                      <span>Your posts</span>
+                    </Link>, 
+                  },
+                  {
+                    content: <Link href={`/space/stars`}>
+                      <span>Your stars</span>
+                    </Link>, 
+                  },
+                  {
+                    content: <Link href={`/space/follows`}>
+                      <span>Your follows</span>
+                    </Link>, 
+                  },
+                  {
+                    content: <Link href={`/space/followers`}>
+                      <span>Your followers</span>
+                    </Link>, 
+                  },
                 ]}
                 style={{top: '50px', right: '0',}}
-                collapsed={collapsed}
+                collapsed={userMenuCollapsed}
               >
                 <div 
                   className={style.mask} 
-                  onClick={() => setCollapsed(true)} 
-                  // style={{display: `${collapsed ? 'none' : 'block'}`}} 
+                  onClick={() => setUserMenuCollapsed(true)}
                   ></div>
+                <Link href={`/space/${uid}`}>
+                  <div className={style.user_desc}>
+                      Signed in as
+                      <strong>{nickname}</strong>
+                  </div>
+                </Link>
+                <div className={style.divider}></div>
               </DropDown>
             </div>
           </Fragment>
           || <Fragment>
             <Button size='mid' onClick={() => {
-              // router.push('/auth/login')
-              // authDialogVisible.current = true
               setAuthDialogVisible(true)
             }}>登录</Button>
             <Dialog 
@@ -101,4 +143,12 @@ const Header = ({ avatar, uid, nickname }: {
   )
 }
 
-export default Header
+const mapStateToProps = ({ userStore }: {
+  userStore: UserStore
+}) => {
+  return {
+    ...userStore
+  }
+}
+
+export default connect(mapStateToProps)(Header)

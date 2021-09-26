@@ -5,15 +5,21 @@
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 3px;
-  border: 1px solid #333333;
+  border: 1px solid #666666;
   color: #333333;
   overflow: hidden;
   padding: 12px 0;
+  box-shadow: 0 8px 24px rgba(140 149 159 / .2);;
+  ul {
+    padding: 0;
+    margin: 0;
+  }
   .dropdown_item {
     padding: 4px 8px 4px 16px;
     display: block;
     &:hover {
       background: #f1f1f1;
+      cursor: pointer;
     }
   }
   z-index: 1000;

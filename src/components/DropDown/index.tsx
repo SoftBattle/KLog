@@ -3,9 +3,9 @@ import styles from './index.module.scss'
 
 const DropDown = ({items, style, collapsed, children}: {
   items: {
-    label: string
+    content: ReactNode
     alt?: string
-    onClick: () => void
+    onClick?: () => void
   }[]
   style?: CSSProperties
   collapsed: boolean
@@ -14,6 +14,10 @@ const DropDown = ({items, style, collapsed, children}: {
   return (
     <div className={`${styles.dropdown} ${collapsed ? styles.collapsed : ''}`} style={style}>
       {
+        children
+      }
+      <ul>
+      {
         items.map((item, idx) => {
           return (
             <li 
@@ -21,14 +25,12 @@ const DropDown = ({items, style, collapsed, children}: {
               key={idx}
               title={item.alt}
               onClick={item.onClick}>
-                {item.label}
+                {item.content}
               </li>
           )
         })
       }
-      {
-        children
-      }
+      </ul>
     </div>
   )
 }
