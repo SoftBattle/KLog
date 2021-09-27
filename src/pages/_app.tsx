@@ -6,7 +6,8 @@ import { Provider } from 'react-redux'
 // import { getOrCreateStore } from '../store'
 // import rootReducer from '../store/reducers'
 import Layout from '../layout'
-import '../mock'
+
+import '../main'
 
 import { store, unsubscribe } from '../store'
 

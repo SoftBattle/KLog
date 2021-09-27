@@ -3,3 +3,5 @@ import './auth'
 Mock.mock('/api/test', 'get', {
   'data': 'hello world!'
 })
+
+// export default Mock

@@ -6,6 +6,7 @@ const Index = () => {
   const getData = async () => {
     const re = await api.test.testGet()
     setIntro(re.data)
+    console.log(re.data)
   }
   useEffect(() => {
     getData()
