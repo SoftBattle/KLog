@@ -1,0 +1,29 @@
+.tab_wrapper {
+  position: sticky;
+  top: 0;
+  display: block;
+}
+
+ul.tabs {
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.item {
+  list-style: none;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  &:hover {
+    cursor: pointer;
+    color: #24292f;
+    border-bottom: 2px solid rgba(175, 184, 193, 0.2);
+    outline: 1px dotted transparent;
+  }
+  &.current {
+    // 当前tab
+    color: #24292f;
+    font-weight: 600;
+    border-bottom: 2px solid #24292f;
+  }
+}

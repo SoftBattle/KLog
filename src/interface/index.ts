@@ -4,11 +4,35 @@ export interface BaseResponse {
   data: any
 }
 
-export interface postInfo {}
+export interface UserInfo {
+  uid: string
+  nickname: string
+  avatar: string
+}
 
-export interface postDetail {}
+export interface PostInfo {
+  pid: string
+  title: string
+  subTitle: string
+  banners: string[]
+  views: number
+  ctime: Date
+  mtime: Date
+  tags: string[]
+  authour: UserInfo
+}
 
-export interface UserInfo {}
+export interface postDetail {
+  pid: string
+  title: string
+  subTitle: string
+  banners: string[]
+  views: number
+  ctime: Date
+  mtime: Date
+  tags: string[]
+  authour: UserInfo
+}
 
 export interface AuthInfo {
   uid: string
