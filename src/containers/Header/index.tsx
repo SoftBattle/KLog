@@ -8,13 +8,16 @@ import Dialog from '../../components/Dialog'
 import AuthForm from '../Auth'
 import NoSSR from 'react-no-ssr'
 import { connect } from 'react-redux'
-import { UserStore } from '../../store/user/actions'
+import { storeUser, UserStore } from '../../store/user/actions'
+import { Dispatch } from 'redux'
+import api from '../../services'
 
-const Header = ({ avatar, uid, nickname, token }: {
+const Header = ({ avatar, uid, nickname, token, setUser }: {
   avatar?: string
   uid?: string
   nickname?: string
   token?: string
+  setUser: Function
 }) => {
   const [active, setActive] = useState(false)
   const [userMenuCollapsed, setUserMenuCollapsed] = useState(true)
@@ -111,6 +114,19 @@ const Header = ({ avatar, uid, nickname, token }: {
                         <span>Your followers</span>
                       </Link>, 
                     },
+                    {
+                      content: 'Sign out',
+                      onClick: async () => {
+                        const flag = window.confirm('当前操作将会退出账户，您确定要退出么？')
+                        if(!flag) return
+                        const re = await api.auth.userLogout()
+                        if(re.stat === 'ok') {
+                          setUser({})
+                        } else {
+                          alert('登出失败')
+                        }
+                      }
+                    }
                   ]}
                   style={{top: '50px', right: '0',}}
                   collapsed={userMenuCollapsed}
@@ -158,4 +174,10 @@ const mapStateToProps = ({ userStore }: {
   }
 }
 
-export default connect(mapStateToProps)(Header)
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    setUser: (user: UserStore) => dispatch(storeUser(user))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

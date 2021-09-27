@@ -9,3 +9,7 @@ export function userLogin(params: AuthInfo) {
 export function userRegist(params: AuthInfo) {
   return post<BaseResponse>('/auth/regist', params)
 }
+
+export function userLogout() {
+  return post<BaseResponse>('/auth/logout')
+}

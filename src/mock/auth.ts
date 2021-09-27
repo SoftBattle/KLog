@@ -36,3 +36,10 @@ Mock.mock('/api/auth/regist', 'post', ops => {
     msg: '用户已存在'
   }
 })
+
+Mock.mock('/api/auth/logout', 'post', ops => {
+  return {
+    stat: 'ok',
+    msg: '登出成功'
+  }
+})
