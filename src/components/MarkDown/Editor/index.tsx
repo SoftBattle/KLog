@@ -12,6 +12,8 @@ import math from '@bytemd/plugin-math'
 import mermaid from '@bytemd/plugin-mermaid'
 import mediumZoom from '@bytemd/plugin-medium-zoom'
 
+import { uploadImages } from '../../../services/file'
+
 const plugins = [
   breaks(),
   footnotes(),
@@ -75,7 +77,11 @@ export default function PostEditor() {
         </span>
         <hr style={{ background: '#333333' }} />
       </div>
-      <Editor value={''} plugins={plugins} />
+      <Editor 
+        value={''} 
+        plugins={plugins} 
+        uploadImages={uploadImages}
+      />
     </Fragment>
   );
 }

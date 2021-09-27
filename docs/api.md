@@ -976,7 +976,7 @@ file: file文件
 ```json
 {
 	stat: 'ok',
-    data: 'hduwed.png'
+  data: 'hduwed.png'
 }
 ```
 

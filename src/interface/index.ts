@@ -22,16 +22,8 @@ export interface PostInfo {
   authour: UserInfo
 }
 
-export interface postDetail {
-  pid: string
-  title: string
-  subTitle: string
-  banners: string[]
-  views: number
-  ctime: Date
-  mtime: Date
-  tags: string[]
-  authour: UserInfo
+export interface postDetail extends PostInfo {
+  content: string
 }
 
 export interface AuthInfo {
