@@ -23,6 +23,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <link rel="shortcut icon" href="/k.svg" />
         <title>KLog, record every moment.</title>
+        <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
       </Head>
       <Provider store={store}>
         <Layout>

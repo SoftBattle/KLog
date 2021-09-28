@@ -1,16 +1,52 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import Tab from '../components/Tab'
 import { PostItem } from '../components/MarkDown'
+// import { usePosts } from '../hooks'
 import styles from './index.module.scss'
+import { GetServerSideProps } from 'next'
+import { PostInfo } from '../interface'
+import api from '../services'
 
 type TabType = 'Latest' | 'Popular'
 
-const Index = () => {
+const SORTMap = {
+  'Latest': 'ctime',
+  'Popular': 'views'
+}
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const re = await api.post.queryPosts({pageIndex: 1, pageSize: 20, keyword: '', sort: 'ctime'})
+  let posts: PostInfo[] = []
+  if(re.stat === 'ok') {
+    posts = re.data.posts
+  }
+
+  return {
+    props: {
+      posts
+    }
+  }
+}
+
+const Index = (props) => {
   const [currentTab, setCurrentTab] = useState<TabType>('Latest')
-  const [posts, setPosts] = useState([])
+  const [pageIndex, setPageIndex] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+  const [sort, setSort] = useState<'ctime' | 'views'>('ctime')
+  const [posts, setPosts] = useState<PostInfo[]>(props.posts || [])
+
+  useEffect(() => {
+    async function request() {
+      const re = await api.post.queryPosts({pageIndex: 1, pageSize: 20, keyword: '', sort: 'ctime'})
+      if(re.stat === 'ok') {
+        setPosts(re.data.posts)
+      }
+    }
+    request()
+  }, [])
 
   const getPostsList = () => posts.map((post, index) => {
-    return <div>文章</div>
+    return <PostItem post={post} key={index} />
   })
 
   return (

@@ -12,6 +12,15 @@
   }
 }
 
+.page_tab {
+  position: sticky !important;
+  position: -webkit-sticky !important;
+  top: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid hsla(0,0%,59.2%,.1);
+  z-index: 100;
+}
+
 @media screen and (max-width: 768px) {
   .show {
     height: 400px;

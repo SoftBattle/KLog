@@ -19,7 +19,7 @@ export interface PostInfo {
   ctime: Date
   mtime: Date
   tags: string[]
-  authour: UserInfo
+  author: UserInfo
 }
 
 export interface postDetail extends PostInfo {

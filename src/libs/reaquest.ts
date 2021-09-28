@@ -1,7 +1,7 @@
 import axios from 'axios'
 // import { BaseResponse } from '../types'
 
-const BS_URL = '/api'
+const BS_URL = process.env.BACKEND ? process.env.BACKEND + '/api' : '/api'
 
 const data = axios.create({
   baseURL: BS_URL,
