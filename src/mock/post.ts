@@ -31,8 +31,8 @@ Mock.mock('/api/post/list', 'post', ops => {
           },
           title: 'readme',
           subTitle: '说明 cehjw0fcujwe cvewj9ver9ow vewru9vwerujr cvweujf0p9wn vwh8jvw8emcjwe0jfwe vcnwri90evjr vdfnjsifvjws fwe9ojf0we9 vcjrwevjker0p deqwdfeqw cewde fdfe fewfw fewfwe effrbxc dcewfwe effwfwe erfwer',
-          banners: ['msms.png', 'dhwyudhw.png'],
-          tags: ['js'],
+          banners: [],
+          tags: ['js', 'dedek', 'djuqw'],
           views: 100,
           ctime: 114218327832,
           mtime: 114356676767

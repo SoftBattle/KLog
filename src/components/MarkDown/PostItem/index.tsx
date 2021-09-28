@@ -2,6 +2,7 @@ import React from "react"
 import styles from './index.module.scss'
 import { PostInfo } from '../../../interface'
 import Link from 'next/link'
+import { timeFormNow } from '../../../utils/formater'
 
 export default function PostItem({ post }: {
   post: PostInfo
@@ -14,10 +15,9 @@ export default function PostItem({ post }: {
         // 点击，进入文章详情页
       }}
       >
-
       <div className={styles.banner}>
         {
-          post.banners[0] && <img src={post.banners[0]} alt="" /> || <img src='/md/markdowm.png' alt="" />
+          post.banners[0] && <img src={post.banners[0]} alt="" /> || <img src='/md/markdown.png' alt="" />
         }
       </div>
 
@@ -28,24 +28,30 @@ export default function PostItem({ post }: {
             <a className={styles.user}>{post.author.nickname}</a>
           </Link>
           <div className={styles.divider}></div>
-          <div className={styles.time}>{post.ctime}</div>
+          <div className={styles.time}>{timeFormNow(post.ctime)}</div>
           <div className={styles.divider}></div>
           <div className={styles.tags}>
             {post.tags.join('·')}
           </div>
         </div>
 
-        <div className={styles.title}>
-          <Link href={`/post/${post.pid}`} passHref>
-            <a>{post.title}</a>
-          </Link>
-        </div>
+        <Link href={`/post/${post.pid}`} passHref>
+          <a className={styles.title}>
+            <span>{post.title}</span>
+          </a>
+        </Link>
 
-        <div className={styles.subTitle}>
-          <Link href={`/post/${post.pid}`} passHref>
-            <a>{post.subTitle}</a>
+        {/* <div className={styles.subTitle}>
+          <Link href={`/post/${post.pid}`}>
+            <span>{post.subTitle}</span>
           </Link>
-        </div>
+        </div> */}
+
+        <Link href={`/post/${post.pid}`} passHref>
+          <a className={styles.subTitle}>
+            <span>{post.subTitle}</span>
+          </a>
+        </Link>
 
         <div className={styles.footer}>
           <div className={styles.item}>

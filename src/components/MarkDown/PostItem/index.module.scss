@@ -1,9 +1,9 @@
 @mixin textOverFlow {
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .post {
@@ -65,15 +65,16 @@
     margin-bottom: 3px;
     margin-top: 10px;
     max-width: 100%;
-    @include textOverFlow()
+    @include textOverFlow();
   }
 
   .subTitle {
+    display: block;
     font-size: 13px;
     color: #86909c;
     margin-top: 10px;
     @include textOverFlow();
-    // max-width: calc(100% - 120px);
+    color: #86909c !important;
   }
 
   .footer {
