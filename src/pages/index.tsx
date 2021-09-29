@@ -20,7 +20,6 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   if(re.stat === 'ok') {
     posts = re.data.posts
   }
-
   return {
     props: {
       posts
@@ -87,8 +86,8 @@ const Index = (props) => {
               name: 'Latest',
               content: <div>最新</div>,
               onClick: () => {
-                setCurrentTab('Latest')
                 setPosts([])
+                setCurrentTab('Latest')
                 document.documentElement.scrollTop = 0
               }
             },
@@ -96,8 +95,8 @@ const Index = (props) => {
               name: 'Popular',
               content: <div>最热</div>,
               onClick: () => {
-                setCurrentTab('Popular')
                 setPosts([])
+                setCurrentTab('Popular')
                 document.documentElement.scrollTop = 0
               }
             }

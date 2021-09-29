@@ -9,9 +9,9 @@
   "scripts": {
     "build": "next build",
     "lint": "next lint",
-    "dev": "cross-env NODE_ENV=development node server.js",
+    "dev": "cross-env NODE_ENV=development node index.js",
     "mock": "node ./mock-server/server.js",
-    "start": "cross-env NODE_ENV=production node server.js"
+    "start": "cross-env NODE_ENV=production node index.js"
   },
   "repository": {
     "type": "git",
@@ -37,8 +37,11 @@
     "axios": "^0.21.4",
     "highlight.js": "^11.2.0",
     "http-proxy": "^1.18.1",
+    "http-proxy-middleware": "^2.0.1",
     "koa": "^2.13.3",
     "koa-router": "^10.1.1",
+    "koa2-connect": "^1.0.2",
+    "koa2-proxy-middleware": "^0.0.4",
     "moment": "^2.29.1",
     "next": "^11.1.2",
     "react": "^17.0.2",

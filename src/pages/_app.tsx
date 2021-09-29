@@ -8,7 +8,7 @@ import '../styles/global.css'
 import 'highlight.js/styles/atom-one-light.css'
 import 'bytemd/dist/index.min.css'
 
-import '../main'
+// import '../main'
 
 import { store, unsubscribe } from '../store'
 
@@ -23,7 +23,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Head>
         <link rel="shortcut icon" href="/k.svg" />
         <title>KLog, record every moment.</title>
-        <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
       </Head>
       <Provider store={store}>
         <Layout>

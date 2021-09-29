@@ -1,6 +1,8 @@
 import axios from 'axios'
 // import { BaseResponse } from '../types'
 
+// const BS_URL = process.env.BACKEND ? process.env.BACKEND + '/api' : '/api'
+
 const BS_URL = process.env.BACKEND ? process.env.BACKEND + '/api' : '/api'
 
 const data = axios.create({
@@ -29,7 +31,6 @@ export const get = async <T>(url: string) => {
 }
 
 export const post = async <T>(url: string, params?: object) => {
-  console.log(params)
   const res: T = await data.post(url, params)
   return res
 }
