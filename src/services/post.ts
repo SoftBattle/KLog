@@ -15,3 +15,11 @@ export function queryPosts(params: PostsQueryParams) {
 export function queryPostDetail(pid: string) {
   return get<BaseResponse>(`/post/${pid}`)
 }
+
+export function starPost(params: {pid: string}) {
+  return post<BaseResponse>(`/post/star`, params)
+}
+
+export function unstarPost(params: {pid: string}) {
+  return post<BaseResponse>(`/post/unstar`, params)
+}

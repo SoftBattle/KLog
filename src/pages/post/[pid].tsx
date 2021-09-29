@@ -67,7 +67,6 @@ const Post = (props: {
   pid: string
 }) => {
   const [post, setPost] = useState<PostDetail>(props.post)
-  // const [star, setStar] = useState(post.star)
   
   // 刷新数据
   const refreshPost = async () => {
@@ -94,8 +93,8 @@ const Post = (props: {
   }
 
   // 关注
-  const follow = async () => {}
-  
+  const followOrUnfollow = async () => {}
+
   return (
     <Fragment>
       <div className={styles.wrapper}>
@@ -123,7 +122,9 @@ const Post = (props: {
             <div className={styles.tags}></div>
           </div>
           <div className={styles.follow}>
-            <Button size='max' onClick={() => {}} >关注</Button>
+            <Button size='max' onClick={() => {
+              followOrUnfollow()
+            }}>follow</Button>
           </div>
         </div>
 

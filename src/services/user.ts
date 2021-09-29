@@ -1,5 +1,5 @@
 import { post } from "../libs/reaquest"
-import { BaseResponse, PostInfo, postDetail } from "../interface"
+import { BaseResponse, PostInfo, PostDetail } from "../interface"
 
 interface UserPostsQueryParams {
   uid: string
@@ -11,4 +11,12 @@ interface UserPostsQueryParams {
 
 export function queryUserPosts(params: UserPostsQueryParams) {
   return post<BaseResponse>('/post/user/posts', params)
+}
+
+export function followAuthor(params: {uid: string}) {
+  return post<BaseResponse>('/post/user/follow', params)
+}
+
+export function unfollowAuthor(params: {uid: string}) {
+  return post<BaseResponse>('/post/user/unfollow', params)
 }

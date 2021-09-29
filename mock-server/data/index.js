@@ -4,7 +4,8 @@ const posts = [
     author: {
       uid: 'cmkk', // 作者id
       nickname: 'cmkangkang', // 作者昵称
-      avatar: '/avatar/me.jpg'
+      avatar: '/avatar/me.jpg',
+      follow: false
     },
     title: '文章管理平台',
     subTitle: 'dewdfewfewfwe dfwefdwe few ',
@@ -19,7 +20,8 @@ const posts = [
     author: {
       uid: 'cmkk', // 作者id
       nickname: 'cmkangkang', // 作者昵称
-      avatar: '/avatar/me.jpg'
+      avatar: '/avatar/me.jpg',
+      follow: true
     },
     title: 'readme',
     subTitle: '说明 cehjw0fcujwe cvewj9ver9ow vewru9vwerujr cvweujf0p9wn vwh8jvw8emcjwe0jfwe vcnwri90evjr vdfnjsifvjws fwe9ojf0we9 vcjrwevjker0p deqwdfeqw cewde fdfe fewfw fewfwe effrbxc dcewfwe effwfwe erfwer',

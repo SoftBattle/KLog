@@ -8,6 +8,7 @@ export interface UserInfo {
   uid: string
   nickname: string
   avatar: string
+  follow: boolean
 }
 
 export interface PostInfo {

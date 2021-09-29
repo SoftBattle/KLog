@@ -49,3 +49,9 @@
   width: auto;
   font-size: 12px;
 }
+
+.btn.disabled {
+  border-color: #d2dae2;
+  background-color: #f5f5f5;
+  color: #d1d1d1;
+}
