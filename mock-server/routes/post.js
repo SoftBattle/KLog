@@ -1,4 +1,7 @@
 const Router = require('koa-router')
+const { posts, postDetails } = require('../data')
+const { genOk } = require('../libs')
+
 function getArrays(data, length) {
   const re = []
   for(let i = 0; i < length; i++) {
@@ -13,32 +16,46 @@ const router = new Router({
 
 router.post('/list', async ctx => {
   try {
-    console.log(ctx.url)
     ctx.body = {
       stat: 'ok',
       msg: '数据获取成功',
       data: {
-        posts: getArrays({
-          pid: 'jiwjisw',
-          author: {
-            uid: 'cmkk', // 作者id
-            nickname: 'cmkangkang', // 作者昵称
-          },
-          title: 'readme',
-          subTitle: '说明',
-          banners: ['msms.png', 'dhwyudhw.png'],
-          tags: ['js'],
-          view: 100,
-          ctime: 114218327832,
-          mtime: 114356676767
-        }, 10),
-        total: 1
+        posts: getArrays(posts[0], 5).concat(getArrays(posts[1], 5)),
+        total: 10
       }
     }
   } catch(err) {
     ctx.body= {
       stat: 'err'
     }
+  }
+})
+
+router.get('/:pid', async ctx => {
+  try {
+    const pid = ctx.params.pid
+    switch(pid) {
+      case 'tep1': 
+        ctx.body = genOk({
+          ...posts[0],
+          content: postDetails[0]
+        })
+        break
+      case 'tep2':
+        ctx.body = genOk({
+          ...posts[1],
+          content: postDetails[2]
+        })
+        break
+      default:
+        ctx.body = genOk({
+          ...posts[0],
+          content: postDetails[3]
+        })
+        break
+    }
+  } catch (error) {
+    
   }
 })
 

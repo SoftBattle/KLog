@@ -1,7 +1,19 @@
 const Koa = require('Koa')
 const router = require('./routes')
 
+const koaBody = require('koa-body')
+
 const app = new Koa()
+
+
+app.use(
+  koaBody({
+    multipart: true,
+    formidable: {
+      maxFileSize: 2097152,
+    },
+  }),
+)
 
 app.use(function(ctx, next) {
   ctx.set('Access-Control-Allow-Origin', ctx.headers.origin) // 不能为 *

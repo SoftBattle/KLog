@@ -22,7 +22,7 @@ export interface PostInfo {
   author: UserInfo
 }
 
-export interface postDetail extends PostInfo {
+export interface PostDetail extends PostInfo {
   content: string
 }
 

@@ -1,0 +1,12 @@
+.avatar {
+  overflow: hidden;
+  border-radius: 3px;
+  img {
+    max-width: 100%;
+    object-position: center;
+    object-fit: cover;
+  }
+  &.circle {
+    border-radius: 50%;
+  }
+}

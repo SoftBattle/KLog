@@ -5,5 +5,5 @@ export function timeFormNow(date: Date) {
 }
 
 export function timeFormater(date: Date) {
-  return moment(date).format('YYYY-MM-DD hh:mm:ss')
+  return moment(date).format('LL')
 }
