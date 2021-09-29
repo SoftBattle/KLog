@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import Layout from '../layout'
 
 import '../styles/global.css'
-import 'highlight.js/styles/atom-one-light.css'
+import 'highlight.js/styles/atom-one-dark.css'
 import 'bytemd/dist/index.min.css'
 
 // import '../main'

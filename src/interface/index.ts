@@ -23,7 +23,8 @@ export interface PostInfo {
 }
 
 export interface PostDetail extends PostInfo {
-  content: string
+  content: string,
+  star: boolean
 }
 
 export interface AuthInfo {

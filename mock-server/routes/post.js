@@ -38,19 +38,22 @@ router.get('/:pid', async ctx => {
       case 'tep1': 
         ctx.body = genOk({
           ...posts[0],
-          content: postDetails[0]
+          content: postDetails[0],
+          star: false
         })
         break
       case 'tep2':
         ctx.body = genOk({
           ...posts[1],
-          content: postDetails[2]
+          content: postDetails[2],
+          star: true
         })
         break
       default:
         ctx.body = genOk({
           ...posts[0],
-          content: postDetails[3]
+          content: postDetails[3],
+          star: false
         })
         break
     }

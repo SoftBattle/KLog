@@ -6,7 +6,8 @@
 .post {
   background-color: #ffffff;
   padding: 24px;
-
+  position: relative;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   .banner {
     overflow: hidden;
     border-radius: 3px;
@@ -19,14 +20,46 @@
       object-position: center;
     }
   }
+  .toolbar {
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    position: fixed;
+    bottom: 5rem;
+    margin-left: -7rem;
+    .btn {
+      background-color: #ffffff;
+      width: 36px;
+      height: 36px;
+      margin: 12px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 4px 0 rgb(0 0 0 / 4%);
+      cursor: pointer;
+      .icon {
+        fill: #b2bac2;
+        &:hover {
+          fill: #8a93a0;
+        }
+        &.full {
+          fill: #333333;
+        }
+      }
+    }
+  }
 }
 
 .user {
   background-color: #ffffff;
   padding: 24px;
   display: flex;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   .avatar {
     margin-right: 12px;
+    cursor: pointer;
   }
   .info {
     flex: 1;
@@ -37,14 +70,17 @@
       font-weight: 700;
       color: #333333;
       margin-bottom: 2px;
+      cursor: pointer;
     }
     span, time {
       margin-right: 8px;
+      display: inline-block;
     }
   }
   .follow {
     width: 60px;
   }
+  
 }
 
 @media screen and (min-width: 961px) {
@@ -71,6 +107,9 @@
     }
     .follow {
       width: 100%;
+    }
+    .toolbar {
+      display: block;
     }
   }
   
