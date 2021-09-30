@@ -1,6 +1,8 @@
 const Router = require('koa-router')
 const postRoute = require('./post')
 const authRoute = require('./auth')
+const userRoute = require('./user')
+const fileRoute = require('./file')
 
 const router = new Router()
 
@@ -12,5 +14,9 @@ router.use((ctx, next) => {
 router.use(authRoute.routes())
 
 router.use(postRoute.routes())
+
+router.use(userRoute.routes())
+
+router.use(fileRoute.routes())
 
 module.exports = router

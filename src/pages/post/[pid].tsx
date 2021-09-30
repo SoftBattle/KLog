@@ -84,16 +84,48 @@ const Post = (props: {
     const star = props.post.star
     if(star) {
       // unstar action
-      // 成功时刷新数据
-      await refreshPost()
+      const re = await api.post.unstarPost({pid: props.pid})
+      if(re.stat === 'ok') {
+        // 提示收藏信息
+        alert('取消收藏成功')
+        // 成功时刷新数据
+        await refreshPost()
+      } else {
+        // 提示收藏信息
+      }
     } else {
-      // star action
-      await refreshPost()
+      const re = await api.post.starPost({pid: props.pid})
+      if(re.stat === 'ok') {
+        alert('收藏成功')
+        // star action
+        await refreshPost()
+      } else {
+        // 提示收藏信息
+      }
     }
   }
 
   // 关注
-  const followOrUnfollow = async () => {}
+  const followOrUnfollow = async () => {
+    const follow = post.author.follow
+    if(follow) {
+      // 执行取关操作
+      const re = await api.user.unfollowAuthor({uid: post.author.uid})
+      if(re.stat === 'ok') {
+        alert('取关成功')
+      } else {
+        
+      }
+    } else {
+      // 执行关注操作
+      const re = await api.user.followAuthor({uid: post.author.uid})
+      if(re.stat === 'ok') {
+        alert('关注成功')
+      } else {
+        
+      }
+    }
+  }
 
   return (
     <Fragment>

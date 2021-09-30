@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 const { posts, postDetails } = require('../data')
-const { genOk } = require('../libs')
+const { genOk, genErr } = require('../libs')
 
 function getArrays(data, length) {
   const re = []
@@ -59,6 +59,24 @@ router.get('/:pid', async ctx => {
     }
   } catch (error) {
     
+  }
+})
+
+router.post('/star', async ctx => {
+  try {
+    const { pid } = ctx.request.body
+    ctx.body = genOk()
+  } catch (error) {
+    ctx.body = genErr()
+  }
+})
+
+router.post('/unstar', async ctx => {
+  try {
+    const { pid } = ctx.request.body
+    ctx.body = genOk()
+  } catch (error) {
+    ctx.body = genErr()    
   }
 })
 

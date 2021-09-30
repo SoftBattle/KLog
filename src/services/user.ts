@@ -10,13 +10,13 @@ interface UserPostsQueryParams {
 }
 
 export function queryUserPosts(params: UserPostsQueryParams) {
-  return post<BaseResponse>('/post/user/posts', params)
+  return post<BaseResponse>('/user/posts', params)
 }
 
 export function followAuthor(params: {uid: string}) {
-  return post<BaseResponse>('/post/user/follow', params)
+  return post<BaseResponse>('/user/follow', params)
 }
 
 export function unfollowAuthor(params: {uid: string}) {
-  return post<BaseResponse>('/post/user/unfollow', params)
+  return post<BaseResponse>('/user/unfollow', params)
 }
