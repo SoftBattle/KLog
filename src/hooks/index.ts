@@ -48,3 +48,4 @@ export function usePosts(pageIndex: number, pageSize: number, sort: 'ctime' | 'v
 export function useUserPosts(pageIndex: number, pageSize: number, sort: 'ctime' | 'views', keyword = '') {
   
 }
+

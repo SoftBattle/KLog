@@ -1,0 +1,43 @@
+.tag_group {
+  display: flex;
+  align-items: center;
+  .tag {
+    height: 24px;
+    border: 1px solid #666666;
+    border-radius: 3px;
+    padding: 1px 6px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    transition: all ease-in-out .3s;
+    &:hover {
+      box-shadow: 0px 1px 2px 0 rgba(0 0 0 / .2) ;
+      border: 1px solid #aaaaaa;
+    }
+    &_btn {
+      display: flex;
+      margin-left: 4px;
+    }
+  }
+  input {
+    border: 1px solid #666666;
+    height: 24px;
+  }
+  button {
+    .icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.icon {
+  transition: all ease-in-out .3s;
+  fill: #666666;
+  width: 18px;
+  height: 18px;
+  &:hover {
+    fill: #aaaaaa;
+  }
+}

@@ -26,8 +26,8 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
   // const authDialogVisible = useRef(false)
   const [authDialogVisible, setAuthDialogVisible] = useState(false)
 
-  const getElems = () => {
-    return 
+  const newPost = () => {
+    // 跳转新建文章页面
   }
 
   return (
@@ -68,7 +68,11 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
                 <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2441" width="200" height="200"><path d="M787.2 380.8c-9.6-9.6-22.4-12.8-35.2-12.8l-480 3.2c-12.8 0-25.6 3.2-35.2 12.8-19.2 19.2-19.2 48 0 67.2l240 240c3.2 3.2 9.6 6.4 12.8 9.6l3.2 3.2c16 6.4 38.4 3.2 51.2-9.6l240-243.2c22.4-22.4 19.2-51.2 3.2-70.4z" p-id="2442"></path></svg>
                 <DropDown
                   items={[
-                    {content: 'New post', onClick: () => {alert('new post')}}
+                    {
+                      content: <Link href={`/new`}>
+                        <span>New post</span>
+                      </Link>, 
+                    }
                   ]} 
                   style={{top: '50px', right: '0'}} 
                   collapsed={userActionCollapsed}
@@ -90,27 +94,27 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
                 <DropDown 
                   items={[
                     {
-                      content: <Link href={`/space/profile`}>
+                      content: <Link href={`/space/${uid}?tab=profile`}>
                         <span>Your profile</span>
                       </Link>, 
                     },
                     {
-                      content: <Link href={`/space/posts`}>
+                      content: <Link href={`/space/${uid}?tab=posts`}>
                         <span>Your posts</span>
                       </Link>, 
                     },
                     {
-                      content: <Link href={`/space/stars`}>
+                      content: <Link href={`/space/${uid}?tab=stars`}>
                         <span>Your stars</span>
                       </Link>, 
                     },
                     {
-                      content: <Link href={`/space/follows`}>
+                      content: <Link href={`/space/${uid}?tab=follows`}>
                         <span>Your follows</span>
                       </Link>, 
                     },
                     {
-                      content: <Link href={`/space/followers`}>
+                      content: <Link href={`/space/${uid}?tab=followers`}>
                         <span>Your followers</span>
                       </Link>, 
                     },

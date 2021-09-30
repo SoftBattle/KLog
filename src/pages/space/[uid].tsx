@@ -5,7 +5,7 @@ const Space = ({ router }: {
   router: NextRouter
 }) => {
   useEffect(() => {
-    // router.query 中存有 参数
+    // router.query 中存有 参数, 分别为 uid 与 tab
     console.log(router.query)
   })
   return <div>Spacem of {router.query.uid}</div>

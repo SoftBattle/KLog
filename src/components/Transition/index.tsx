@@ -9,7 +9,7 @@ type TransitionProps = CSSTransitionProps & {
   wrapper?: boolean,
 }
 
-const Transition: React.FC<TransitionProps> = (props) => {
+const Transition: React.FC<TransitionProps> = (props: TransitionProps) => {
   const {
     children,
     classNames,

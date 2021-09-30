@@ -28,6 +28,14 @@ export interface PostDetail extends PostInfo {
   star: boolean
 }
 
+export interface Post {
+  title: string,
+  subTitle: string
+  banners: string[]
+  tags: string[]
+  content: string
+}
+
 export interface AuthInfo {
   uid: string
   passwd: string
