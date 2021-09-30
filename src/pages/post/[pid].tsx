@@ -7,6 +7,7 @@ import { Viewer } from '../../components/MarkDown'
 import Avatar from '../../components/Avatar'
 import Button from '../../components/Button'
 import { IconStar, IconComemnt, IconLike } from '../../components/Icons'
+import message from '../../components/Message'
 import styles from './index.module.scss'
 import { timeFormater } from '../../utils/formater'
 
@@ -112,7 +113,7 @@ const Post = (props: {
       // 执行取关操作
       const re = await api.user.unfollowAuthor({uid: post.author.uid})
       if(re.stat === 'ok') {
-        alert('取关成功')
+        message.success('Unfollow success!')
       } else {
         
       }
@@ -120,7 +121,7 @@ const Post = (props: {
       // 执行关注操作
       const re = await api.user.followAuthor({uid: post.author.uid})
       if(re.stat === 'ok') {
-        alert('关注成功')
+        message.success('Follow success!')
       } else {
         
       }

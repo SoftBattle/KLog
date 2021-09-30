@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import { storeUser, UserStore } from '../../store/user/actions'
-
+import Message from '../../components/Message/message'
 
 const Index = ({ uid, nickname, avatar, token, setUser }) => {
   const [id, setId] = useState(uid)
@@ -19,6 +19,7 @@ const Index = ({ uid, nickname, avatar, token, setUser }) => {
         avatar,
         token
       })}>确定</button>
+      <Message type={'success'} text={'请求 http request'}></Message>
     </div>
   )
 }
