@@ -88,20 +88,21 @@ const Post = (props: {
       const re = await api.post.unstarPost({pid: props.pid})
       if(re.stat === 'ok') {
         // 提示收藏信息
-        alert('取消收藏成功')
+        message.success('Unfollow success!')
         // 成功时刷新数据
         await refreshPost()
       } else {
-        // 提示收藏信息
+        message.error('Unfollow failed.')
       }
     } else {
       const re = await api.post.starPost({pid: props.pid})
       if(re.stat === 'ok') {
-        alert('收藏成功')
+        message.success('Unfollow success!')
         // star action
         await refreshPost()
       } else {
         // 提示收藏信息
+        message.error('Unfollow failed.')
       }
     }
   }
@@ -114,8 +115,10 @@ const Post = (props: {
       const re = await api.user.unfollowAuthor({uid: post.author.uid})
       if(re.stat === 'ok') {
         message.success('Unfollow success!')
+        await refreshPost()
       } else {
-        
+        message.error('Unfollow failed.')
+        await refreshPost()
       }
     } else {
       // 执行关注操作
@@ -123,7 +126,7 @@ const Post = (props: {
       if(re.stat === 'ok') {
         message.success('Follow success!')
       } else {
-        
+        message.error('Follow failed.')
       }
     }
   }

@@ -52,7 +52,7 @@ router.get('/:pid', async ctx => {
       default:
         ctx.body = genOk({
           ...posts[0],
-          content: postDetails[3],
+          content: postDetails[1],
           star: false
         })
         break

@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom'
 import styles from './index.module.scss'
 import { useState, useEffect } from 'react'
 import { TransitionGroup } from 'react-transition-group'
-// import Transition from '../Transition/transition'
+import Transition from '../Transition'
 import Message, { MessageType } from './message'
 
 export interface MessageApi {
@@ -57,20 +57,20 @@ export const MessageContainer = () => {
 
   return (
     <div className="message-container">
-      {/* <TransitionGroup> */}
+      <TransitionGroup>
         {
           notices.map(({ text, key, type }) => (
-            // <Transition
-            //   timeout={200}
-            //   in
-            //   animation="slide-in-top"
-            //   key={key}
-            // >
+            <Transition
+              timeout={200}
+              in
+              animation='slide-in-top'
+              key={key}
+            >
               <Message type={type} text={text} key={key} />
-            // </Transition>
+            </Transition>
           ))
         }
-      {/* </TransitionGroup> */}
+      </TransitionGroup>
     </div>
   )
 }

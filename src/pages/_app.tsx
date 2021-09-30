@@ -7,6 +7,7 @@ import Layout from '../layout'
 import '../styles/global.css'
 import 'highlight.js/styles/atom-one-dark.css'
 import 'bytemd/dist/index.min.css'
+import '../styles/animation.scss'
 
 // import '../main'
 
