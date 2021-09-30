@@ -1,5 +1,5 @@
 import react, { useState, useEffect } from 'react'
-import Link from 'next/link'
+import Router, { useRouter } from 'next/router'
 import { Post } from '../../interface'
 import api from '../../services'
 import { Editor } from '../../components/MarkDown'
@@ -20,6 +20,8 @@ const New = () => {
   const [tags, setTags] = useState<string[]>([])
   const [banners, setBanners] = useState<string[]>([])
 
+  const router = useRouter()
+
   const uploadBanner = async (files: File[]) => {
     const list = files?.map(file => {
       let formData = new FormData()
@@ -35,12 +37,40 @@ const New = () => {
     message.success('Images upload success!')
   }
 
+  const newPost = async () => {
+    if(title.length === 0) {
+      message.info('请输入标题！')
+      return
+    }
+    if(content.length < 10) {
+      message.info('正文内容不得少于10个字符！')
+    }
+    const re = await api.post.newPost({
+      title,
+      subTitle,
+      content,
+      tags,
+      banners
+    })
+    if(re.stat === 'ok') {
+      message.success('发布成功！')
+      router.back()
+    }
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
         <div className={styles.title} title='请输入文章标题'>
           <input type="text" placeholder='输入文章标题...' value={title} onChange={e => setTitle(e.target.value)} />
-          <span className={styles.tip}></span>
+          <div className={styles.btn}>
+            <Button
+              type='primary'
+              onClick={() => {
+                newPost()
+              }}
+              >发 布</Button>
+          </div>
         </div>
         <div className={styles.contain} title='请输入文章描述'>
           <div className={styles.subTitle}>

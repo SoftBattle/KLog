@@ -80,4 +80,14 @@ router.post('/unstar', async ctx => {
   }
 })
 
+router.post('/new', async ctx => {
+  try {
+    const { title, content } = ctx.request.body
+    console.log(title, content)
+    ctx.body = genOk()
+  } catch (error) {
+    ctx.body = genErr()    
+  }
+})
+
 module.exports = router

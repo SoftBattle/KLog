@@ -25,10 +25,15 @@
   .title {
     height: 5rem;
     border-bottom: 1px solid #dddddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     input {
       height: 100%;
       font-size: 24px;
       font-weight: 500;
+      flex: 1;
+      margin-right: 16px;
     }
   }
   .subTitle {
@@ -62,3 +67,5 @@
   padding: 12px 24px;
   border-bottom: 1px solid #e1e4e8;
 }
+
+.btn {}

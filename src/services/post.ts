@@ -1,5 +1,5 @@
 import { get, post } from "../libs/reaquest"
-import { BaseResponse, PostInfo, PostDetail } from "../interface"
+import { BaseResponse, PostInfo, PostDetail, Post } from "../interface"
 
 interface PostsQueryParams {
   pageIndex: number
@@ -22,4 +22,8 @@ export function starPost(params: {pid: string}) {
 
 export function unstarPost(params: {pid: string}) {
   return post<BaseResponse>(`/post/unstar`, params)
+}
+
+export function newPost(params: Post) {
+  return post<BaseResponse>(`/post/new`, params)
 }
