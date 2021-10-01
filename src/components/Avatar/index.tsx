@@ -1,5 +1,5 @@
-import { CSSProperties } from 'react';
-import styles from './index.module.scss';
+import { CSSProperties } from 'react'
+import styles from './index.module.scss'
 
 interface Props {
   size?: number, // full 代表宽占满一行

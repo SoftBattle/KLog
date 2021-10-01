@@ -33,7 +33,7 @@ const New = () => {
     res.forEach(re => {
       if(re.stat === 'ok') banns.push(re.data)
     })
-    setBanners(banns);
+    setBanners(banns)
     message.success('Images upload success!')
   }
 

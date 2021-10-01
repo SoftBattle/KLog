@@ -4,7 +4,7 @@ export type MessageType = 'info' | 'success' | 'danger' | 'warning'
 import styles from './index.module.scss'
 
 export interface MessageProps {
-  text: string;
+  text: string
   type: MessageType
 }
 

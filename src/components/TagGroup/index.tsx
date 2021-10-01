@@ -1,16 +1,16 @@
-import React, { useState, useEffect, MouseEvent, useRef, CSSProperties, forwardRef, Ref } from 'react';
+import React, { useState, useEffect, MouseEvent, useRef, CSSProperties, forwardRef, Ref } from 'react'
 import message from '../Message'
 import { TransitionGroup } from 'react-transition-group'
 import Transition from '../Transition'
 import { IconDelete, IconAdd } from '../Icons'
-import Button from '../Button';
+import Button from '../Button'
 import styles from './index.module.scss'
 
 interface TagProps {
   closable?: true,
   onClose?: (e: MouseEvent) => void,
   onClick?: () => void,
-  children: any;
+  children: any
   style?: CSSProperties
 }
 
@@ -28,42 +28,42 @@ const Tag = forwardRef((props: TagProps, ref: Ref<HTMLElement>) => {
       }
     </span>
   )
-});
+})
 
 export default function EditableTagGroup(props: {tags: string[], onChange: (tags: string[]) => void, max?:16, min?: 1}) {
-  const [tags, setTags] = useState<string[]>([]);
-  const [inputVisible, setInputVisible] = useState(false);
-  const [val, setVal] = useState('');
+  const [tags, setTags] = useState<string[]>([])
+  const [inputVisible, setInputVisible] = useState(false)
+  const [val, setVal] = useState('')
   const handleDelete = (rmTag: string) => {
-    const ts = tags.filter(t => t !== rmTag);
-    setTags(ts);
+    const ts = tags.filter(t => t !== rmTag)
+    setTags(ts)
   }
   const handleAdd = () => {
-    const nTag = val;
+    const nTag = val
     if(nTag.length < (props?.min || 1)) {
-      message.info(`标签不得少于${props.min || 1}个字符!`);
-      setInputVisible(false);
-      return;
+      message.info(`标签不得少于${props.min || 1}个字符!`)
+      setInputVisible(false)
+      return
     }
     if(nTag.length > (props?.max || 16)) {
-      message.info(`标签不得多于${props.max || 16}个字符!`);
-      setInputVisible(false);
-      return;
+      message.info(`标签不得多于${props.max || 16}个字符!`)
+      setInputVisible(false)
+      return
     }
     if(tags.includes(nTag)) {
-      message.info('该标签已存在！');
-      return;
+      message.info('该标签已存在！')
+      return
     }
-    const ts = tags.concat(nTag);
-    setTags(ts);
-    props.onChange(ts);
-    setInputVisible(false);
-    setVal('');
+    const ts = tags.concat(nTag)
+    setTags(ts)
+    props.onChange(ts)
+    setInputVisible(false)
+    setVal('')
   }
 
   useEffect(() => {
     setTags(props.tags)
-  }, [props.tags]);
+  }, [props.tags])
 
   return (
     // <div className={styles.tag_group}>
@@ -79,8 +79,8 @@ export default function EditableTagGroup(props: {tags: string[], onChange: (tags
             <Tag 
               closable
               onClose={(e: MouseEvent) => {
-                e.preventDefault();
-                handleDelete(tag);
+                e.preventDefault()
+                handleDelete(tag)
               }}
               >
               {tag}
@@ -98,9 +98,9 @@ export default function EditableTagGroup(props: {tags: string[], onChange: (tags
           onBlur={handleAdd}
           onKeyPress={(e: React.KeyboardEvent) => {
             if(e.nativeEvent.keyCode === 13) {
-              handleAdd();
+              handleAdd()
             } else if(e.nativeEvent.keyCode === 27) {
-              setInputVisible(false);
+              setInputVisible(false)
             }
           }}
           /> || 

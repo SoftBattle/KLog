@@ -1,5 +1,5 @@
-import { CSSProperties, ChangeEventHandler, Fragment, SyntheticEvent } from 'react';
-import styles from './index.module.scss';
+import { CSSProperties, ChangeEventHandler, Fragment, SyntheticEvent } from 'react'
+import styles from './index.module.scss'
 
 interface Props {
   // onChange函数，将参数传出

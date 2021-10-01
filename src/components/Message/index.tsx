@@ -6,10 +6,10 @@ import Transition from '../Transition'
 import Message, { MessageType } from './message'
 
 export interface MessageApi {
-  info: (text: string, duration?: number) => void;
-  success: (text: string, duration?: number) => void;
-  warning: (text: string, duration?: number) => void;
-  error: (text: string, duration?: number) => void;
+  info: (text: string, duration?: number) => void
+  success: (text: string, duration?: number) => void
+  warning: (text: string, duration?: number) => void
+  error: (text: string, duration?: number) => void
 }
 
 export interface Notice {

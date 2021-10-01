@@ -1,9 +1,9 @@
-import { Fragment } from 'react';
-import { Editor } from '@bytemd/react';
-import style from './index.module.scss';
+import { Fragment } from 'react'
+import { Editor } from '@bytemd/react'
+import style from './index.module.scss'
 
-import highlight from '@bytemd/plugin-highlight';
-import gfm from '@bytemd/plugin-gfm';
+import highlight from '@bytemd/plugin-highlight'
+import gfm from '@bytemd/plugin-gfm'
 import breaks from '@bytemd/plugin-breaks'
 import footnotes from '@bytemd/plugin-footnotes'
 import frontmatter from '@bytemd/plugin-frontmatter'
@@ -24,7 +24,7 @@ const plugins = [
   math(),
   mermaid(),
   mediumZoom()
-];
+]
 
 export default function PostEditor({ content, onChange }) {
   return (
@@ -36,5 +36,5 @@ export default function PostEditor({ content, onChange }) {
         uploadImages={uploadImages}
       />
     </Fragment>
-  );
+  )
 }

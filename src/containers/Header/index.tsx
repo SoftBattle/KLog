@@ -22,12 +22,24 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
   const [active, setActive] = useState(false)
   const [userMenuCollapsed, setUserMenuCollapsed] = useState(true)
   const [userActionCollapsed, setUserActionCollapsed] = useState(true)
-  // const router = useRouter()
-  // const authDialogVisible = useRef(false)
+  const input = useRef<HTMLInputElement>()
   const [authDialogVisible, setAuthDialogVisible] = useState(false)
 
-  const newPost = () => {
-    // 跳转新建文章页面
+  const router = useRouter()
+
+  const [keyword, setKeyword] = useState('')
+
+  const handleSearch = () => {
+    // 搜索文章
+    if(keyword.trim().length === 0) {
+      return
+    }
+    router.push({
+      pathname: '/search',
+      query: {
+        keyword
+      }
+    })
   }
 
   return (
@@ -39,10 +51,10 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
       <div className={style.centeral}>
         <nav className={style.topnav}>
           <Link href='/'>
-            <span className={style.nav_item}>Home</span>
+            <span className={style.nav_item}>首页</span>
           </Link>
           <Link href='/test/redux'>
-            <span className={style.nav_item}>Found</span>
+            <span className={style.nav_item}>发现</span>
           </Link>
         </nav>
       </div>
@@ -50,8 +62,18 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
         <div className={`${style.search} ${active ? style.search_active : ''}`}>
           <form className={style.input_container} onSubmit={(e) => {
             e.preventDefault()
+            handleSearch()
+            input.current.blur()
           }} >
-            <input placeholder='type to search...' type="text" onFocus={() => setActive(true)} onBlur={() => setActive(false)} />
+            <input 
+              ref={input}
+              placeholder='type to search...' 
+              type="text" 
+              onFocus={() => setActive(true)} 
+              onBlur={() => setActive(false)} 
+              value={keyword}
+              onChange={e => setKeyword(e.target.value)}
+              />
           </form>
           <div className={style.search_btn}>
             <svg className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7870" width="200" height="200"><path d="M940.571 852.693l-214.475-214.722c44.778-60.855 69.263-134.077 69.263-211.012 0-95.732-37.354-185.78-104.889-253.311-67.781-67.536-157.825-104.889-253.557-104.889s-185.78 37.354-253.311 104.889c-139.518 139.518-139.518 366.859 0 506.626 67.536 67.536 157.579 104.889 253.311 104.889 77.18 0 150.155-24.487 211.257-69.263l214.475 214.722c21.52 21.52 56.403 21.52 77.676 0 21.77-21.52 21.77-56.403 0.25-77.921zM252.866 611.256c-101.425-101.673-101.425-266.916 0-368.342 49.227-49.227 114.535-76.192 184.295-76.192 69.511 0 134.819 26.966 184.047 76.192 49.227 49.227 76.443 114.535 76.443 184.295 0 69.762-27.211 135.065-76.443 184.295-49.227 49.227-114.535 76.192-184.047 76.192-69.762-0.25-135.065-27.211-184.295-76.443z" p-id="7871"></path></svg>
