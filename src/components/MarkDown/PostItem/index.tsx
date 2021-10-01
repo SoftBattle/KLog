@@ -7,7 +7,6 @@ import { timeFormNow } from '../../../utils/formater'
 export default function PostItem({ post }: {
   post: PostInfo
 }) {
-  
   return (
     <div 
       className={styles.post}
@@ -17,7 +16,7 @@ export default function PostItem({ post }: {
       >
       <div className={styles.banner}>
         {
-          post.banners[0] && <img src={post.banners[0]} alt="" /> || <img src='/md/markdown.png' alt="" />
+          post?.banners && <img src={post.banners[0]} alt="" /> || <img src='/md/markdown.png' alt="" />
         }
       </div>
 

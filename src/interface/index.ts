@@ -40,3 +40,10 @@ export interface AuthInfo {
   uid: string
   passwd: string
 }
+
+export interface PostsQueryParams {
+  pageIndex: number
+  pageSize: number
+  sort: 'ctime' | 'views'
+  keyword: string
+}

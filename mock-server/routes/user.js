@@ -24,4 +24,29 @@ router.post('/unfollow', async ctx => {
   }
 })
 
+router.post('/search', async ctx => {
+  try {
+    const { keyword } = ctx.request.body
+    ctx.body = genOk({
+      users: [
+        {
+          uid: 'cmkk',
+          nickname: 'cmKangkang',
+          avatar: '/avatar/me.jpg',
+          follow: false
+        },
+        {
+          uid: keyword,
+          nickname: 'cm' + keyword,
+          avatar: '/avatar/me.jpg',
+          follow: true
+        },
+      ],
+      total: 100
+    })
+  } catch (error) {
+    ctx.body = genErr()
+  }
+})
+
 module.exports = router

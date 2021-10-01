@@ -27,6 +27,8 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   }
 }
 
+// 触底刷新机制需要完善
+
 const Index = (props) => {
   const [currentTab, setCurrentTab] = useState<TabType>('Latest')
   const [pageIndex, setPageIndex] = useState(1)
@@ -88,6 +90,7 @@ const Index = (props) => {
               onClick: () => {
                 setPosts([])
                 setCurrentTab('Latest')
+                setPageIndex(1)
                 document.documentElement.scrollTop = 0
               }
             },
@@ -97,6 +100,7 @@ const Index = (props) => {
               onClick: () => {
                 setPosts([])
                 setCurrentTab('Popular')
+                setPageIndex(1)
                 document.documentElement.scrollTop = 0
               }
             }

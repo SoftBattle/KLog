@@ -20,3 +20,7 @@ export function followAuthor(params: {uid: string}) {
 export function unfollowAuthor(params: {uid: string}) {
   return post<BaseResponse>('/user/unfollow', params)
 }
+
+export function queryUsers(params: {keyword: string, pageIndex: number, pageSize: number}) {
+  return post<BaseResponse>('/user/search', params)
+}
