@@ -26,6 +26,7 @@ router.post('/login', async ctx => {
     }
     if(flag) {
       console.log(usr)
+      ctx.cookies.set('token', usr.token)
       ctx.body = genOk(usr)
     } else {
       ctx.body = genErr()

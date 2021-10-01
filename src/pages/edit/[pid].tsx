@@ -1,6 +1,6 @@
 import react, { useState, useEffect } from 'react'
 import Router, { useRouter } from 'next/router'
-import { Post } from '../../interface'
+import { Post, PostDetail } from '../../interface'
 import api from '../../services'
 import { Editor } from '../../components/MarkDown'
 import Button from '../../components/Button'
@@ -10,15 +10,41 @@ import Uploader from '../../components/Uploader'
 import Dialog from '../../components/Dialog'
 import { FormItem, TextArea } from '../../components/Form'
 import styles from './index.module.scss'
+import { GetServerSideProps } from 'next'
 
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const { pid } = ctx.params
+  let post: PostDetail = {} as PostDetail
+  const re = await api.post.queryPostDetail(pid as string)
+  if(re.stat === 'ok') {
+    post = re.data
+    return {
+      props: {
+        pid,
+        post: {
+          title: post.title,
+          subTitle: post.subTitle,
+          banners: post.banners,
+          tags: post.tags,
+          content: post.content
+        } 
+      }
+    }
+  } else {
 
+  }
+  
+}
 
-const New = () => {
-  const [content, setContent] = useState('')
-  const [title, setTitle] = useState('')
-  const [subTitle, setSubTitle] = useState('')
-  const [tags, setTags] = useState<string[]>([])
-  const [banners, setBanners] = useState<string[]>([])
+const Edit = ({pid, post}: {
+  pid: string
+  post: Post
+}) => {
+  const [content, setContent] = useState<string>(post.content)
+  const [title, setTitle] = useState<string>(post.title)
+  const [subTitle, setSubTitle] = useState<string>(post.subTitle)
+  const [tags, setTags] = useState<string[]>(post.tags)
+  const [banners, setBanners] = useState<string[]>(post.banners)
   const [dialogVisible, setDialogVisible] = useState(false)
   const router = useRouter()
 
@@ -37,7 +63,7 @@ const New = () => {
     message.success('Images upload success!')
   }
 
-  const newPost = async () => {
+  const updatePost = async () => {
     if(title.length === 0) {
       message.info('请输入标题！')
       return
@@ -69,13 +95,13 @@ const New = () => {
               // newPost()
               setDialogVisible(true)
             }}
-            >发 布</Button>
-          <Dialog title={'发布文章'} width={500} onClose={() => {setDialogVisible(false)}} visible={dialogVisible}>
+            >更 新</Button>
+          <Dialog title={'更新文章'} width={500} onClose={() => {setDialogVisible(false)}} visible={dialogVisible}>
             <FormItem label='输入标签:' style={{marginTop: '0'}}>
               <TagGroup tags={tags} onChange={setTags} />
             </FormItem>
             <FormItem label='上传封面:'>
-              <Uploader upload={uploadBanner} type='banner' style={{width: '160px', height: '100px'}} />
+              <Uploader upload={uploadBanner} initialValue={post.banners[0]} type='banner' style={{width: '160px', height: '100px'}} />
             </FormItem>
             <FormItem label='编辑摘要:'>
               <TextArea value={subTitle} onChange={e => setSubTitle(e.target.value)} required></TextArea>
@@ -83,8 +109,8 @@ const New = () => {
             <FormItem style={{display: 'flex', justifyContent: 'flex-end'}}>
               <Button onClick={() => setDialogVisible(false)} className={styles.btn}>取消</Button>
               <Button onClick={() => {
-                newPost()
-              }} type='primary'>确定并发布</Button>
+                updatePost()
+              }} type='primary'>确定并更新</Button>
             </FormItem>
           </Dialog>
         </div>
@@ -94,4 +120,4 @@ const New = () => {
   )
 }
 
-export default New
+export default Edit

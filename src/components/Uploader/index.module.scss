@@ -5,9 +5,6 @@
   overflow: hidden;
   border: 1px dashed #555555;
   border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   &.avatar {
     border-radius: 50%;
   }
@@ -15,6 +12,12 @@
     max-width: 100%;
     object-fit: cover;
     object-position: center;
+  }
+  .img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   .add {
     position: absolute;

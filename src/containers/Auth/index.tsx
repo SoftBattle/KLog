@@ -1,9 +1,8 @@
 import React, { useState, useRef, Fragment } from 'react'
 import { useRouter } from 'next/router'
 import styles from './index.module.scss'
-// import Dialog from '../../components/Dialog'
-import Input from '../../components/Input'
 import Button from '../../components/Button'
+import { FormItem, Input } from '../../components/Form'
 import api from '../../services'
 import { connect, DispatchProp } from 'react-redux'
 import { Dispatch,  } from 'redux'
@@ -58,10 +57,10 @@ const AuthForm = ({ setUser }: {
         onClick={e => e.stopPropagation()}
         onSubmit={handleLogin}
         >
-        <h2 className={styles.form_title}>
-          Sign into KLog
-        </h2>
-        <div className={styles.form_item}>
+        <h1 className={styles.title}>
+          登录到 KLog
+        </h1>
+        <FormItem style={{margin: '24px 0'}}>
           <Input 
             type="text" 
             name="uid" 
@@ -74,8 +73,8 @@ const AuthForm = ({ setUser }: {
             }}
             style={{height: '38px'}}
           />
-        </div>
-        <div className={styles.form_item}>
+        </FormItem>
+        <FormItem style={{margin: '24px 0'}}>
           <Input 
             type="password"  
             name="passwd" 
@@ -88,25 +87,25 @@ const AuthForm = ({ setUser }: {
             }}
             style={{height: '38px'}}
           />
-        </div>
-        <div className={styles.form_item}>
-          <Button func='submit' type='primary' size='max' style={{height: '40px'}}>Sign in</Button>
-        </div>
-        <span className={styles.form_footer}>Don't have an account? Go to <a onClick={(e) => {
+        </FormItem>
+        <FormItem>
+          <Button func='submit' type='primary' size='max' style={{height: '40px'}}>登  录</Button>
+        </FormItem>
+        <span className={styles.footer}>还没有账号？去 <a onClick={(e) => {
           e.preventDefault()
           setForm('regist')
           e.stopPropagation()
-        }}>Sign up</a>. </span>
+        }}>注册</a>. </span>
       </form>
     )
   }
 
   const Regist = () => {
     return <form className={styles.form} onSubmit={handleRegist}>
-      <h2 className={styles.form_title}>
-        Sign up to KLog
-      </h2>
-      <div className={styles.form_item}>
+      <h1 className={styles.title}>
+        注册到 KLog
+      </h1>
+      <FormItem style={{margin: '24px 0'}}>
         <Input 
           type="text" 
           name="uid" 
@@ -119,8 +118,8 @@ const AuthForm = ({ setUser }: {
           }}
           style={{height: '38px'}}
         />
-      </div>
-      <div className={styles.form_item}>
+      </FormItem>
+      <FormItem style={{margin: '24px 0'}}>
         <Input 
           type="password"  
           name="passwd" 
@@ -133,15 +132,14 @@ const AuthForm = ({ setUser }: {
           }} 
           style={{height: '38px'}}
         />
-      </div>
-      <div className={styles.form_item}>
-        <Button func='submit' type='primary' size='max' style={{height: '40px'}}>Sign in</Button>
-      </div>
-      <span className={styles.form_footer}>Already have an account? Go to <a onClick={(e) => {
+      </FormItem>
+      <FormItem style={{margin: '24px 0'}}>
+        <Button func='submit' type='primary' size='max' style={{height: '40px'}}>注  册</Button>
+      </FormItem>
+      <span className={styles.footer}>已有账号？去 <a onClick={(e) => {
         e.preventDefault()
-        // e.stopPropagation()
         setForm('login')
-      }}>Sign in</a>. </span>
+      }}>登录</a>. </span>
     </form>
   }
 

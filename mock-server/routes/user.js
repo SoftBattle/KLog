@@ -8,6 +8,8 @@ const router = new Router({
 
 router.post('/follow', async ctx => {
   try {
+    const token = ctx.cookies.get('token')
+    console.log(token)
     ctx.body = genOk()
   } catch (error) {
     ctx.body = genErr()

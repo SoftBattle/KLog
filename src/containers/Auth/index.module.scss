@@ -1,21 +1,20 @@
-form.form {
-  .form_item {
-    margin: 24px 0;
-  }
-  h2.form_title {
+.form { 
+  user-select: none;
+  .title {
+    font-size: 24px;
     text-align: center;
   }
-  
-  span.form_footer {
+  span.footer {
     display: block;
     text-align: center;
-  }
-  
-  a {
-    font-weight: 600;
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
+    font-size: 12px;
+    word-spacing: 2px;
+    a {
+      font-weight: 600;
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
 }

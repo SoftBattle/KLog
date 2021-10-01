@@ -9,6 +9,7 @@ interface Props {
   style?: CSSProperties,
   onClick?: () => void,
   disabled?: boolean
+  className?: string 
 }
 
 export default function Button(props: Props) {
@@ -27,7 +28,7 @@ export default function Button(props: Props) {
     if(disabled) {
       className += ` ${styles.disabled}`
     }
-    return className;
+    return props?.className ? className + ' ' + props.className : className
   }
   return (
     <button 
