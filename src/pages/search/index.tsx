@@ -5,6 +5,7 @@ import Tab from '../../components/Tab'
 import { PostInfo, UserInfo, PostsQueryParams } from '../../interface'
 import { PostItem } from '../../components/MarkDown'
 import UserItem from '../../components/UserItem'
+import Pagination from '../../components/Pagination'
 import styles from './index.module.scss'
 import api from '../../services'
 
@@ -80,7 +81,6 @@ const Search = (props: {
       console.log(re.data.posts)
       setPosts(re.data.posts)
       setTotal(re.data.total)
-      setPageIndex(1)
     }
   }
 
@@ -90,30 +90,8 @@ const Search = (props: {
       console.log(re.data.users)
       setUsers(re.data.users)
       setTotal(re.data.total)
-      setPageIndex(1)
     }
   }
-
-  const [toBottom, setToBottom] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = (e) => {
-      const clientHeight = document.documentElement.clientHeight
-      const scrollTop = document.documentElement.scrollTop
-      const scrollHeight = document.documentElement.scrollHeight
-      if(scrollHeight - scrollTop - clientHeight <= 16) {
-        setToBottom(true)
-        setPageIndex(pageIndex + 1)
-      } else {
-        setToBottom(false)
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
 
   const getList = () => {
     switch(currentTab) {
@@ -125,9 +103,12 @@ const Search = (props: {
   }
 
   useEffect(() => {
-    // index改变，tab不变
-    toBottom && getMore(currentTab)
-  }, [pageIndex])
+    if(currentTab === 'user') {
+      getUsers({pageIndex, pageSize, keyword: props.keyword})
+    } else {
+      getPosts({pageIndex, pageSize, keyword: props.keyword, sort})
+    }
+  }, [pageIndex, currentTab])
 
   return (
     <div className={styles.wrapper}>
@@ -141,7 +122,7 @@ const Search = (props: {
               onClick: async () => {
                 setCurrentTab('post')
                 document.documentElement.scrollTop = 0
-                await getPosts({pageIndex: 1, pageSize, keyword: props.keyword, sort})
+                setPageIndex(1)
               }
             },
             {
@@ -150,7 +131,7 @@ const Search = (props: {
               onClick: async () => {
                 setCurrentTab('user')
                 document.documentElement.scrollTop = 0
-                await getUsers({pageIndex: 1, pageSize, keyword: props.keyword})
+                setPageIndex(1)
               }
             }
           ]} 
@@ -168,6 +149,9 @@ const Search = (props: {
           getList()
         }
       </div>
+      <Pagination current={pageIndex} total={total} pageSize={20} onChange={(current) => {
+        setPageIndex(current)
+      }} />
     </div>
   )
 }

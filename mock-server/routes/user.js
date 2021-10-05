@@ -41,6 +41,54 @@ router.post('/search', async ctx => {
           avatar: '/avatar/me.jpg',
           follow: true
         },
+        {
+          uid: 'cmkk',
+          nickname: 'cmKangkang',
+          avatar: '/avatar/me.jpg',
+          follow: false
+        },
+        {
+          uid: keyword,
+          nickname: 'cm' + keyword,
+          avatar: '/avatar/me.jpg',
+          follow: true
+        },
+        {
+          uid: 'cmkk',
+          nickname: 'cmKangkang',
+          avatar: '/avatar/me.jpg',
+          follow: false
+        },
+        {
+          uid: keyword,
+          nickname: 'cm' + keyword,
+          avatar: '/avatar/me.jpg',
+          follow: true
+        },
+        {
+          uid: 'cmkk',
+          nickname: 'cmKangkang',
+          avatar: '/avatar/me.jpg',
+          follow: false
+        },
+        {
+          uid: keyword,
+          nickname: 'cm' + keyword,
+          avatar: '/avatar/me.jpg',
+          follow: true
+        },
+        {
+          uid: 'cmkk',
+          nickname: 'cmKangkang',
+          avatar: '/avatar/me.jpg',
+          follow: false
+        },
+        {
+          uid: keyword,
+          nickname: 'cm' + keyword,
+          avatar: '/avatar/me.jpg',
+          follow: true
+        },
       ],
       total: 100
     })

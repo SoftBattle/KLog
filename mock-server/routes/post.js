@@ -21,7 +21,7 @@ router.post('/list', async ctx => {
       msg: '数据获取成功',
       data: {
         posts: getArrays(posts[0], 5).concat(getArrays(posts[1], 5)),
-        total: 10
+        total: 20
       }
     }
   } catch(err) {

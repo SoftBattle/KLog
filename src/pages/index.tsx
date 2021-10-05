@@ -17,12 +17,15 @@ const SORTMap = {
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const re = await api.post.queryPosts({pageIndex: 1, pageSize: 20, keyword: '', sort: 'ctime'})
   let posts: PostInfo[] = []
+  let total: number
   if(re.stat === 'ok') {
     posts = re.data.posts
+    total = re.data.total || 0
   }
   return {
     props: {
-      posts
+      posts,
+      total
     }
   }
 }
@@ -35,17 +38,19 @@ const Index = (props) => {
   const pageSize = 10
   const [posts, setPosts] = useState<PostInfo[]>(props.posts || [])
   const [toBottom, setToBottom] = useState(false)
+  const [total, setTotal] = useState(props.total || 0)
 
   useEffect(() => {
     async function request(pageIndex: number, pageSize: number, sort: 'ctime' | 'views') {
       const re = await api.post.queryPosts({pageIndex, pageSize, keyword: '', sort})
       if(re.stat === 'ok') {
-        setPosts(posts.concat(re.data.posts))
+        if(re.data.total !== total) setTotal(re.data.total)
+        if(posts.length < total) setPosts(posts.concat(re.data.posts))
       }
     }
     const sortType = SORTMap[currentTab] as ('ctime' | 'views')
     toBottom && request(pageIndex, pageSize, sortType)
-  }, [toBottom, currentTab, pageIndex])
+  }, [toBottom, currentTab])
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -53,8 +58,8 @@ const Index = (props) => {
       const scrollTop = document.documentElement.scrollTop
       const scrollHeight = document.documentElement.scrollHeight
       if(scrollHeight - scrollTop - clientHeight <= 16) {
-        setToBottom(true)
         setPageIndex(pageIndex + 1)
+        setToBottom(true)
       } else {
         setToBottom(false)
       }
@@ -89,8 +94,8 @@ const Index = (props) => {
               content: <div>最新</div>,
               onClick: () => {
                 setPosts([])
-                setCurrentTab('Latest')
                 setPageIndex(1)
+                setCurrentTab('Latest')
                 document.documentElement.scrollTop = 0
               }
             },
@@ -99,8 +104,8 @@ const Index = (props) => {
               content: <div>最热</div>,
               onClick: () => {
                 setPosts([])
-                setCurrentTab('Popular')
                 setPageIndex(1)
+                setCurrentTab('Popular')
                 document.documentElement.scrollTop = 0
               }
             }
