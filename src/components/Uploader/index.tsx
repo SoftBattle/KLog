@@ -25,10 +25,10 @@ function beforeUpload(file: File) {
 
 export default function ImageUpload(props: {
   upload: (files: File[]) => void, // 文件上传方法
-  max?: number, // 最大数量
+  max?: number // 最大数量
   style: React.CSSProperties // 样式
-  type: 'avatar' | 'banner',
-  initialValue?: string, // 初始banner路径
+  type: 'avatar' | 'banner'
+  initialValue?: string // 初始banner路径
 }) {
   const [imgUrl, setImgUrl] = useState('')
   const [files, setFiles] = useState<File[]>([])

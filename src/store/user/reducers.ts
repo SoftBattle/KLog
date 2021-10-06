@@ -13,12 +13,25 @@ const initialUserStore = (): UserStore => {
   }
 }
 
-
-
 export const userStore = (state = {}, action: USER_Action) => {
   switch(action.type) {
     case 'STORE_USER':
       return action.data
+    case 'UPDATE_NICKNAME':
+      return {
+        ...state,
+        nickname: action.data
+      }
+    case 'UPDATE_AVATAR':
+      return {
+        ...state,
+        avatar: action.data
+      }
+    case 'UPDATE_INFO':
+      return {
+        ...state,
+        ...action.data
+      }
     default:
       return state
   }

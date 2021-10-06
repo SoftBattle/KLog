@@ -176,5 +176,32 @@ router.post('/stars', async ctx => {
   }
 })
 
+router.put('/avatar', async ctx => {
+  try {
+    const { avatar } = ctx.request.body
+    ctx.body = genOk()
+  } catch (error) {
+    ctx.body = genErr()
+  }
+})
+
+router.put('/nickname', async ctx => {
+  try {
+    const { nickname } = ctx.request.body
+    ctx.body = genOk()
+  } catch (error) {
+    ctx.body = genErr()
+  }
+})
+
+router.put('/passwd', async ctx => {
+  try {
+    const { newPasswd, oldPasswd } = ctx.request.body
+    ctx.body = genOk()
+  } catch (error) {
+    ctx.body = genErr()
+  }
+})
+
 
 module.exports = router

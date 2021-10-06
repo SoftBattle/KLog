@@ -1,4 +1,4 @@
-import { post } from "../libs/reaquest"
+import { post, put } from "../libs/reaquest"
 import { BaseResponse, PostInfo, PostDetail } from "../interface"
 
 interface UserPostsQueryParams {
@@ -39,4 +39,16 @@ export function queryUserFollows(params: UserPostsQueryParams) {
 
 export function queryUserFollowers(params: UserPostsQueryParams) {
   return post<BaseResponse>('/user/followers', params)
+}
+
+export function updateUserNickname(params: { nickname: string }) {
+  return put<BaseResponse>('/user/nickname', params)
+}
+
+export function updateUserAvatar(params: { avatar: string }) {
+  return put<BaseResponse>('/user/avatar', params)
+}
+
+export function updateUserPasswd(params: { newPasswd: string, oldPasswd: string }) {
+  return put<BaseResponse>('/user/passwd', params)
 }
