@@ -24,3 +24,19 @@ export function unfollowAuthor(params: {uid: string}) {
 export function queryUsers(params: {keyword: string, pageIndex: number, pageSize: number}) {
   return post<BaseResponse>('/user/search', params)
 }
+
+export function getUserInfo(params: { uid: string }) {
+  return post<BaseResponse>('/user/info', params)
+}
+
+export function queryUserStars(params: UserPostsQueryParams) {
+  return post<BaseResponse>('/user/stars', params)
+}
+
+export function queryUserFollows(params: UserPostsQueryParams) {
+  return post<BaseResponse>('/user/follows', params)
+}
+
+export function queryUserFollowers(params: UserPostsQueryParams) {
+  return post<BaseResponse>('/user/followers', params)
+}
