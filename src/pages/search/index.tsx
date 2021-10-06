@@ -140,18 +140,15 @@ const Search = (props: {
       </div>
       <div className={styles.list}>
         {
-          // currentTab === 'post' ?
-          //   posts.map((post, idx) => {
-          //     return <PostItem post={post} key={idx} />
-          //   }) : users.map((user, idx) => {
-          //     return <UserItem user={user} key={idx} />
-          //   })
           getList()
         }
       </div>
-      <Pagination current={pageIndex} total={total} pageSize={20} onChange={(current) => {
-        setPageIndex(current)
-      }} />
+      <div className={styles.pagi}>
+        <Pagination current={pageIndex} total={total} pageSize={20} onChange={(current) => {
+          setPageIndex(current)
+          document.documentElement.scrollTop = 0
+        }} />
+      </div>
     </div>
   )
 }
