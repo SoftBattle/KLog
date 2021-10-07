@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { GetServerSideProps } from 'next'
 import styles from './index.module.scss'
 import Tab from '../../components/Tab'
-import { UserInfo } from '../../interface'
+import { PostInfo, UserInfo } from '../../interface'
 import message from '../../components/Message'
 import Uploader from '../../components/Uploader'
 import Avatar from '../../components/Avatar'
@@ -11,6 +11,9 @@ import Button from '../../components/Button'
 import Dialog from '../../components/Dialog'
 import { FormItem, Input } from '../../components/Form'
 import { IconEdit, IconSub } from '../../components/Icons'
+import { PostItem } from '../../components/MarkDown'
+import UserItem from '../../components/UserItem'
+import Pagination from '../../components/Pagination'
 import { connect } from 'react-redux'
 import { updateAvatar, updateInfo, updateNickname, UserStore } from '../../store/user/actions'
 import { Dispatch } from 'redux'
@@ -23,7 +26,6 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   let data: any = null
   // 获取 user 
   const userRe = await api.user.getUserInfo({uid: uid as string})
-  console.log(userRe.data)
   if(userRe.stat === 'ok') {
     user = userRe.data
   }
@@ -46,9 +48,9 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       if(dataRe.stat === 'ok') data = dataRe.data
       break
     default:
-      break // profile的数据
+      data = 'welcome to my home.'
   }
-  // 根据 tab 获取初始数据
+
   return {
     props: {
       uid,
@@ -61,9 +63,9 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 
 type TabType = 'profile' | 'posts' | 'stars' | 'follows' | 'followers'
 
-const Space = ({ uid, tab, user, uuser, updateReduxUserInfo, updateReduxUserNickname, updateReduxUserAvatar }: {
+const Space = ({ uid, tab, user, uuser, data, updateReduxUserInfo, updateReduxUserNickname, updateReduxUserAvatar }: {
   uid: string
-  tab: string
+  tab: TabType
   user: UserInfo,
   uuser: {
     uid: string
@@ -72,6 +74,7 @@ const Space = ({ uid, tab, user, uuser, updateReduxUserInfo, updateReduxUserNick
   updateReduxUserInfo: Function
   updateReduxUserNickname: Function
   updateReduxUserAvatar: Function
+  data: any
 }) => {
   const [avatar, setAvatar] = useState(user.avatar)
   const [nickname, setNickname] = useState(user.nickname)
@@ -81,6 +84,18 @@ const Space = ({ uid, tab, user, uuser, updateReduxUserInfo, updateReduxUserNick
   const [changeAvatarVisiable, setChangeAvatarVisiable] = useState(false)
   const [editInfoVisiable, setEditInfoVisiable] = useState(false)
   const [changePwdVisiable, setChangePwdVisiable] = useState(false)
+  
+  const [posts, setPosts] = useState<PostInfo[]>([])
+  const [users, setUsers] = useState<UserInfo[]>([])
+  const [pageIndex, setPageIndex] = useState(1)
+  // const total = data?.total || 0
+  const [total, setTotal] = useState(0)
+  const pageSize = 10
+
+  useEffect(() => {
+    setPageIndex(1)
+    refreshData()
+  }, [tab])
 
   const uploadImage = async (files: File[]) => {
     const formData = new FormData()
@@ -142,6 +157,54 @@ const Space = ({ uid, tab, user, uuser, updateReduxUserInfo, updateReduxUserNick
     }
   }
 
+  const getTabContent = () => {
+    switch(tab) {
+      case 'posts':
+        return <Posts posts={posts} />
+      case 'stars':
+        return <Stars stars={posts} />
+      case 'follows':
+        return <Follows follows={users} />
+      case 'followers':
+        return <Followers followers={users} />
+      default:
+        return <Profile data={data as string} />
+    }
+  }
+
+  const refreshData = async () => {
+    let apiFunc: Function
+    switch(tab) {
+      case 'posts':
+        apiFunc = api.user.queryUserPosts
+        break
+      case 'stars':
+        apiFunc = api.user.queryUserStars
+        break
+      case 'follows':
+        apiFunc = api.user.queryUserFollows
+        break
+      case 'followers':
+        apiFunc = api.user.queryUserFollowers
+        break
+      default:
+        return
+    }
+    const params = { pageIndex, pageSize: 20, sort: 'ctime', uid }
+    const re = await apiFunc(params)
+    if(re.stat === 'ok') {
+      re.data?.posts && setPosts(re.data?.posts)
+      re.data?.users && setUsers(re.data?.users)
+      re.data?.total && setTotal(re.data?.total)
+    } else {
+      message.error('数据请求失败！')
+    }
+  }
+
+  useEffect(() => {
+    refreshData()
+  }, [pageIndex])
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.user}>
@@ -176,7 +239,7 @@ const Space = ({ uid, tab, user, uuser, updateReduxUserInfo, updateReduxUserNick
             }
           </div>
           <div className={styles.name}>
-            <span style={{fontSize: '26px', fontWeight: 700, display: 'block'}}>{nickname}</span>
+            <span style={{fontSize: '26px', fontWeight: 700, display: 'block'}}>{user.nickname}</span>
             <span style={{fontSize: '20px', fontWeight: 300, display: 'block'}}>{user.uid}</span>
           </div>
           <div className={styles.btns}>
@@ -256,39 +319,47 @@ const Space = ({ uid, tab, user, uuser, updateReduxUserInfo, updateReduxUserNick
               {
                 name: '',
                 content: <Link href={`/space/${uid}`}>
-                  <div>概览</div>
+                  <a>概览</a>
                 </Link>,
               },
               {
                 name: 'posts',
-                content: <Link href={`/space/${uid}?tab=posts`}>
-                  <div>博客</div>
+                content: <Link href={`/space/${uid}?tab=posts`} passHref>
+                  <a>博客</a>
                 </Link>,
               },
               {
                 name: 'stars',
-                content: <Link href={`/space/${uid}?tab=stars`}>
-                  <div>收藏</div>
+                content: <Link href={`/space/${uid}?tab=stars`} passHref>
+                  <a>收藏</a>
                 </Link>,
               },
               {
                 name: 'follows',
-                content: <Link href={`/space/${uid}?tab=follows`}>
-                  <div>订阅</div>
+                content: <Link href={`/space/${uid}?tab=follows`} passHref>
+                  <a>订阅</a>
                 </Link>,
               },
               {
                 name: 'followers',
-                content: <Link href={`/space/${uid}?tab=followers`}>
-                  <div>粉丝</div>
+                content: <Link href={`/space/${uid}?tab=followers`} passHref>
+                  <a>粉丝</a>
                 </Link>,
               }
             ]} 
             currentTab={tab}
           ></Tab>
         </div>
-        <div className={styles.main}>
-          {/* 显示内容 */}
+        {/* <div className={styles.main}></div> */}
+        {
+          getTabContent()
+        }
+        <div className={styles.pagi}>
+          <Pagination current={pageIndex} total={total} pageSize={pageSize} onChange={(idx) => {
+            console.log(idx)
+            setPageIndex(idx)
+            document.documentElement.scrollTop = 0
+          }} />
         </div>
       </div>
     </div>
@@ -296,15 +367,61 @@ const Space = ({ uid, tab, user, uuser, updateReduxUserInfo, updateReduxUserNick
 }
 
 // 概述
-const Profile = () => {}
+const Profile = ({data}) => {
+  return <div>{data}</div>
+}
+
 // 博客
-const Posts = () => {}
+const Posts = ({ posts }: {
+  posts: PostInfo[]
+}) => {
+  return (
+    <div className={styles.posts}>
+      {
+        posts.map((post, idx) => <PostItem post={post} key={idx} />)
+      }
+    </div>
+  )
+}
+
 // 我的收藏
-const Stars = () => {}
+const Stars = ({ stars }: {
+  stars: PostInfo[]
+}) => {
+  return (
+    <div className={styles.stars}>
+      {
+        stars.map((star, idx) => <PostItem post={star} key={idx} />)
+      }
+    </div>
+  )
+}
+
 // 我的关注
-const Follows = () => {}
+const Follows = ({ follows }: {
+  follows: UserInfo[]
+}) => {
+  return (
+    <div className={styles.follows}>
+      {
+        follows.map((follow, idx) => <UserItem user={follow} key={idx} />)
+      }
+    </div>
+  )
+}
+
 // 我的粉丝
-const Followers = () => {}
+const Followers = ({ followers }: {
+  followers: UserInfo[]
+}) => {
+  return (
+    <div className={styles.followers}>
+      {
+        followers.map((follower, idx) => <UserItem user={follower} key={idx} />)
+      }
+    </div>
+  )
+}
 
 const mapStateToProps = ({ userStore }: { userStore: UserStore }) => {
   return {

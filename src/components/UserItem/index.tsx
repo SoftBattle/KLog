@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { UserInfo } from "../../interface"
 import styles from './index.module.scss'
 import Avatar from "../Avatar"
@@ -7,10 +7,14 @@ import Link from "next/link"
 import api from '../../services'
 import message from '../Message'
 
-const UserItem = ({ user }: {
+const UserItem = ({ user, flag=false }: {
   user: UserInfo
+  flag?: boolean // 显示关注按钮
 }) => {
   const [follow, setFollow] = useState(user.follow)
+  useEffect(() => {
+    setFollow(user.follow)
+  })
   const followOrUnfollow = async () => {
     if(follow) {
       // 执行取关操作
@@ -47,7 +51,7 @@ const UserItem = ({ user }: {
     </div>
     <div className={styles.btn}>
       {
-        follow ? <Button style={{width: '100%'}} onClick={() => followOrUnfollow()}>取消关注</Button> : <Button style={{width: '100%'}} onClick={() => followOrUnfollow()} type='primary' >关注</Button>
+        follow && <Button style={{width: '100%'}} onClick={() => followOrUnfollow()}>取消关注</Button> || <Button style={{width: '100%'}} onClick={() => followOrUnfollow()} type='primary' >关注</Button>
       }
     </div>
   </div>

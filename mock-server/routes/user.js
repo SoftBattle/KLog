@@ -35,9 +35,14 @@ router.post('/unfollow', async ctx => {
 router.post('/info', async ctx => {
   try {
     const { uid } = ctx.request.body
+    let id = 'cmkk', name = 'cmKangkang'
+    if(uid !== 'cmkk') {
+      id = 'cmyy'
+      name = 'cmYY'
+    }
     ctx.body = genOk({
-      uid: 'cmkk',
-      nickname: 'cmKangkang',
+      uid: id,
+      nickname: name,
       avatar: '/avatar/me.jpg',
       follow: false
     })
@@ -157,7 +162,7 @@ router.post('/posts', async ctx => {
   try {
     const { uid } = ctx.request.body
     ctx.body = genOk({
-      uposts: [...getArrays(posts[0], 5), ...getArrays(posts[1], 5)],
+      posts: [...getArrays(posts[0], 10)],
       total: 40
     })
   } catch (error) {
@@ -168,7 +173,7 @@ router.post('/posts', async ctx => {
 router.post('/stars', async ctx => {
   try {
     ctx.body = genOk({
-      posts: [...getArrays(posts[0], 5), ...getArrays(posts[1], 5)],
+      posts: [...getArrays(posts[1], 10)],
       total: 20
     })
   } catch (error) {

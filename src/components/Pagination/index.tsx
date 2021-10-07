@@ -38,7 +38,7 @@ const Pagination = ( props: {
             for(let i = startPage; i <= totalSize && i < startPage + listSize; i++) {
               let cn = styles.item
               if(i === current) cn += ` ${styles.current}`
-              const item = <li className={cn} onClick={() => onChange(i)}>{i}</li>
+              const item = <li className={cn} onClick={() => onChange(i)} key={i}>{i}</li>
               items.push(item)
             }
             return items

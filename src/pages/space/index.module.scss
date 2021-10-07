@@ -1,6 +1,7 @@
 .wrapper {
   display: flex;
   padding: 0 24px;
+  align-items: flex-start;
 }
 
 .user {
@@ -46,6 +47,12 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e6e7ec;
+  }
+  .pagi {
+    text-align: center;
+    margin: 8px 0;
   }
   margin-left: 24px;
 }
