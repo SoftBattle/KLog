@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   .info {
     button {
       margin: 8px 0;
@@ -43,6 +44,7 @@
   flex-shrink: 0;
   background-color: #ffffff;
   border-radius: 3px;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
   .tab_container {
     position: sticky;
     top: 0;

@@ -9,15 +9,18 @@ import AuthForm from '../Auth'
 import NoSSR from 'react-no-ssr'
 import { connect } from 'react-redux'
 import { storeUser, UserStore } from '../../store/user/actions'
+import { changeValue, changeType, SearchStore } from '../../store/search/actions'
 import { Dispatch } from 'redux'
 import api from '../../services'
 
-const Header = ({ avatar, uid, nickname, token, setUser }: {
+const Header = ({ avatar, uid, nickname, token, setUser, keyword, changeKeywordValue }: {
   avatar?: string
   uid?: string
   nickname?: string
   token?: string
   setUser: Function
+  keyword: string
+  changeKeywordValue: Function
 }) => {
   const [active, setActive] = useState(false)
   const [userMenuCollapsed, setUserMenuCollapsed] = useState(true)
@@ -27,7 +30,7 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
 
   const router = useRouter()
 
-  const [keyword, setKeyword] = useState('')
+  // const [keyword, setKeyword] = useState('')
 
   const handleSearch = () => {
     // 搜索文章
@@ -72,7 +75,7 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
               onFocus={() => setActive(true)} 
               onBlur={() => setActive(false)} 
               value={keyword}
-              onChange={e => setKeyword(e.target.value)}
+              onChange={e => changeKeywordValue(e.target.value)}
               />
           </form>
           <div className={style.search_btn}>
@@ -192,17 +195,22 @@ const Header = ({ avatar, uid, nickname, token, setUser }: {
   )
 }
 
-const mapStateToProps = ({ userStore }: {
+const mapStateToProps = ({ userStore, searchStore }: {
   userStore: UserStore
+  searchStore: SearchStore
 }) => {
   return {
-    ...userStore
+    ...userStore,
+    keyword: searchStore?.value,
+    type: searchStore?.type
   }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    setUser: (user: UserStore) => dispatch(storeUser(user))
+    setUser: (user: UserStore) => dispatch(storeUser(user)),
+    changeKeywordValue: (data: string) => dispatch(changeValue(data)),
+    changeSearchType: (data: 'user' | 'post') => dispatch(changeType(data))
   }
 }
 

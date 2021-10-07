@@ -8,12 +8,15 @@ import UserItem from '../../components/UserItem'
 import Pagination from '../../components/Pagination'
 import styles from './index.module.scss'
 import api from '../../services'
+import { connect } from 'react-redux'
+import { changeType, changeValue, SearchStore } from '../../store/search/actions'
+import { Dispatch } from 'redux'
 
 const pageSize = 20
 const sort = 'views'
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { keyword } = ctx.query
+  const { keyword, type='' } = ctx.query
   const re = await api.post.queryPosts({
     pageIndex: 1,
     pageSize,
@@ -25,7 +28,6 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     const total= re.data.total
     return {
       props: {
-        keyword,
         users: [],
         posts,
         total
@@ -40,11 +42,15 @@ type SearchType = 'user' | 'post'
 
 const Search = (props: { 
   keyword: string
+  type: SearchType
+  changeKeywordValue: Function
+  changeSearchType: Function
   posts: PostInfo[]
   users: UserInfo[]
   total: number
 }) => {
-  const [currentTab, setCurrentTab] = useState<SearchType>('post')
+  // const [currentTab, setCurrentTab] = useState<SearchType>()
+  const currentTab = props.type
   const [users, setUsers] = useState<UserInfo[]>(props.users || [])
   const [posts, setPosts] = useState<PostInfo[]>(props.posts || [])
   const [pageIndex, setPageIndex] = useState(1)
@@ -120,7 +126,8 @@ const Search = (props: {
               name: 'post',
               content: <div>文章</div>,
               onClick: async () => {
-                setCurrentTab('post')
+                // setCurrentTab('post')
+                props.changeSearchType('post')
                 document.documentElement.scrollTop = 0
                 setPageIndex(1)
               }
@@ -129,7 +136,8 @@ const Search = (props: {
               name: 'user',
               content: <div>用户</div>,
               onClick: async () => {
-                setCurrentTab('user')
+                // setCurrentTab('user')
+                props.changeSearchType('user')
                 document.documentElement.scrollTop = 0
                 setPageIndex(1)
               }
@@ -153,4 +161,18 @@ const Search = (props: {
   )
 }
 
-export default Search
+const mapStateToProps = ({ searchStore }: { searchStore: SearchStore }) => {
+  return {
+    keyword: searchStore?.value,
+    type: searchStore?.type
+  }
+}
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    changeKeywordValue: (data: string) => dispatch(changeValue(data)),
+    changeSearchType: (data: SearchType) => dispatch(changeType(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

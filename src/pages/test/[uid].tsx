@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from 'react'
-import Head from 'next/head'
+import Link from 'next/link'
 import { GetServerSideProps } from 'next'
 import styles from './index.module.scss'
 import Tab from '../../components/Tab'
@@ -84,11 +84,18 @@ const Space = ({ uid, tab, user, uuser, data, updateReduxUserInfo, updateReduxUs
   const [changeAvatarVisiable, setChangeAvatarVisiable] = useState(false)
   const [editInfoVisiable, setEditInfoVisiable] = useState(false)
   const [changePwdVisiable, setChangePwdVisiable] = useState(false)
+  
+  const [posts, setPosts] = useState<PostInfo[]>([])
+  const [users, setUsers] = useState<UserInfo[]>([])
   const [pageIndex, setPageIndex] = useState(1)
-  const total = data?.total || 0
+  // const total = data?.total || 0
+  const [total, setTotal] = useState(0)
   const pageSize = 10
-  const [list, setList] = useState<PostInfo[] | UserInfo[]>(data?.posts || data?.users)
-  // const [total, setTotal] = useState(data?.total || 0)
+
+  useEffect(() => {
+    setPageIndex(1)
+    refreshData()
+  }, [tab])
 
   const uploadImage = async (files: File[]) => {
     const formData = new FormData()
@@ -153,17 +160,13 @@ const Space = ({ uid, tab, user, uuser, data, updateReduxUserInfo, updateReduxUs
   const getTabContent = () => {
     switch(tab) {
       case 'posts':
-        // return <Posts posts={posts} />
-        return <Posts posts={list as PostInfo[]} />
+        return <Posts posts={posts} />
       case 'stars':
-        // return <Stars stars={posts} />
-        return <Stars stars={list as PostInfo[]} />
+        return <Stars stars={posts} />
       case 'follows':
-        // return <Follows follows={users} />
-        return <Follows follows={list as UserInfo[]} />
+        return <Follows follows={users} />
       case 'followers':
-        // return <Followers followers={users} />
-        return <Followers followers={list as UserInfo[]} />
+        return <Followers followers={users} />
       default:
         return <Profile data={data as string} />
     }
@@ -187,11 +190,12 @@ const Space = ({ uid, tab, user, uuser, data, updateReduxUserInfo, updateReduxUs
       default:
         return
     }
-    const params = { pageIndex, pageSize, sort: 'ctime', uid }
+    const params = { pageIndex, pageSize: 20, sort: 'ctime', uid }
     const re = await apiFunc(params)
     if(re.stat === 'ok') {
-      // re.data?.total && setTotal(re.data?.total)
-      setList(re.data?.users || re.data?.posts)
+      re.data?.posts && setPosts(re.data?.posts)
+      re.data?.users && setUsers(re.data?.users)
+      re.data?.total && setTotal(re.data?.total)
     } else {
       message.error('数据请求失败！')
     }
@@ -203,21 +207,6 @@ const Space = ({ uid, tab, user, uuser, data, updateReduxUserInfo, updateReduxUs
 
   return (
     <div className={styles.wrapper}>
-      <Head>
-        <title>
-          {
-            (() => {
-              switch(tab) {
-                case 'posts': return '你的博客'
-                case 'stars': return '你的收藏'
-                case 'follows': return '你的订阅'
-                case 'followers': return '你的粉丝'
-                default: return '你的空间'
-              }
-            })()
-          }
-        </title>
-      </Head>
       <div className={styles.user}>
         {/* 显示用户信息与编辑 */}
         <div className={styles.info}>
@@ -329,24 +318,33 @@ const Space = ({ uid, tab, user, uuser, data, updateReduxUserInfo, updateReduxUs
             tabs={[
               {
                 name: '',
-                content: <a href={`/space/${uid}`}>概览</a>
+                content: <Link href={`/space/${uid}`}>
+                  <a>概览</a>
+                </Link>,
               },
               {
                 name: 'posts',
-                content: <a href={`/space/${uid}?tab=posts`}>博客</a>
-
+                content: <Link href={`/space/${uid}?tab=posts`} passHref>
+                  <a>博客</a>
+                </Link>,
               },
               {
                 name: 'stars',
-                content: <a href={`/space/${uid}?tab=stars`}>收藏</a>
+                content: <Link href={`/space/${uid}?tab=stars`} passHref>
+                  <a>收藏</a>
+                </Link>,
               },
               {
                 name: 'follows',
-                content: <a href={`/space/${uid}?tab=follows`}>订阅</a>
+                content: <Link href={`/space/${uid}?tab=follows`} passHref>
+                  <a>订阅</a>
+                </Link>,
               },
               {
                 name: 'followers',
-                content: <a href={`/space/${uid}?tab=followers`}>粉丝</a>
+                content: <Link href={`/space/${uid}?tab=followers`} passHref>
+                  <a>粉丝</a>
+                </Link>,
               }
             ]} 
             currentTab={tab}
@@ -358,6 +356,7 @@ const Space = ({ uid, tab, user, uuser, data, updateReduxUserInfo, updateReduxUs
         }
         <div className={styles.pagi}>
           <Pagination current={pageIndex} total={total} pageSize={pageSize} onChange={(idx) => {
+            console.log(idx)
             setPageIndex(idx)
             document.documentElement.scrollTop = 0
           }} />
