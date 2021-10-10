@@ -34,7 +34,10 @@
     "@bytemd/plugin-medium-zoom": "^1.10.13",
     "@bytemd/plugin-mermaid": "^1.10.13",
     "@bytemd/react": "^1.10.13",
+    "ahooks": "^2.10.11",
     "axios": "^0.21.4",
+    "echarts": "^5.2.1",
+    "echarts-for-react": "^3.0.1",
     "highlight.js": "^11.2.0",
     "http-proxy": "^1.18.1",
     "http-proxy-middleware": "^2.0.1",
@@ -54,6 +57,7 @@
     "sass": "^1.42.0"
   },
   "devDependencies": {
+    "@types/echarts": "^4.9.10",
     "@types/mockjs": "^1.0.4",
     "@types/react": "17.0.16",
     "@types/react-dom": "^17.0.9",
