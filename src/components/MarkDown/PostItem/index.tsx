@@ -1,11 +1,12 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import styles from './index.module.scss'
 import { PostInfo } from '../../../interface'
 import Link from 'next/link'
 import { timeFormNow } from '../../../utils/formater'
 
-export default function PostItem({ post }: {
+export default function PostItem({ post, children }: {
   post: PostInfo
+  children?: ReactNode
 }) {
   return (
     <div 
@@ -65,6 +66,9 @@ export default function PostItem({ post }: {
           </div>
         </div>
       </div>
+      {
+        children
+      }
     </div>
   )
 }

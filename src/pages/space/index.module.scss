@@ -59,6 +59,37 @@
   margin-left: 24px;
 }
 
+.tool {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  a {
+    color: #333333;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .btn {
+    svg {
+      fill: #666666;
+      width: 14px;
+      height: 14px;
+    }
+  }
+  .menu {
+    display: none;
+    position: absolute;
+    right: 60px;
+  }
+  &:hover {
+    cursor: pointer;
+    .menu {
+      display: block;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .wrapper {
     display: block;

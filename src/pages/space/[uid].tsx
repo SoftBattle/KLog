@@ -10,14 +10,16 @@ import Avatar from '../../components/Avatar'
 import Button from '../../components/Button'
 import Dialog from '../../components/Dialog'
 import { FormItem, Input } from '../../components/Form'
-import { IconEdit, IconSub } from '../../components/Icons'
+import { IconEdit, IconSub, IconOption } from '../../components/Icons'
 import { PostItem } from '../../components/MarkDown'
 import UserItem from '../../components/UserItem'
 import Pagination from '../../components/Pagination'
+import DropDown from '../../components/DropDown'
 import { connect } from 'react-redux'
 import { updateAvatar, updateInfo, updateNickname, UserStore } from '../../store/user/actions'
 import { Dispatch } from 'redux'
 import api from '../../services'
+import Link from 'next/link'
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const { uid } = ctx.params
@@ -367,6 +369,25 @@ const Space = ({ uid, tab, user, uuser, data, updateReduxUserInfo, updateReduxUs
   )
 }
 
+const ToolBtn = ({ pid }) => {
+  return (
+    <div className={styles.tool}>
+      <div className={styles.btn}>
+        <IconOption></IconOption>
+      </div>
+      <div className={styles.menu}>
+        <DropDown style={{width: '60px', padding: '4px 0'}} items={[
+          {
+            content: <Link href={`/edit/${pid}`} passHref>
+              <a>编辑</a>
+            </Link>,
+          }
+        ]} collapsed={false}></DropDown>
+      </div>
+    </div>
+  )
+}
+
 // 概述
 const Profile = ({data}) => {
   return <div>{data}</div>
@@ -379,7 +400,9 @@ const Posts = ({ posts }: {
   return (
     <div className={styles.posts}>
       {
-        posts.map((post, idx) => <PostItem post={post} key={idx} />)
+        posts.map((post, idx) => <PostItem post={post} key={idx}>
+          <ToolBtn pid={post.pid}></ToolBtn>
+        </PostItem>)
       }
     </div>
   )
@@ -392,7 +415,7 @@ const Stars = ({ stars }: {
   return (
     <div className={styles.stars}>
       {
-        stars.map((star, idx) => <PostItem post={star} key={idx} />)
+        stars.map((star, idx) => <PostItem post={star} key={idx}></PostItem>)
       }
     </div>
   )
