@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const { posts, postDetails } = require('../data')
+const { posts, postDetails, calendar } = require('../data')
 const { genOk, genErr } = require('../libs')
 
 const router = new Router({
@@ -203,6 +203,20 @@ router.put('/passwd', async ctx => {
   try {
     const { newPasswd, oldPasswd } = ctx.request.body
     ctx.body = genOk()
+  } catch (error) {
+    ctx.body = genErr()
+  }
+})
+
+router.post('/act', async ctx => {
+  try {
+    const { uid } = ctx.request.body
+    ctx.body = genOk(
+      {
+        list: calendar,
+        year: '2021'
+      }
+    )
   } catch (error) {
     ctx.body = genErr()
   }

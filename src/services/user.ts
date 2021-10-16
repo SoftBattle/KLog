@@ -52,3 +52,7 @@ export function updateUserAvatar(params: { avatar: string }) {
 export function updateUserPasswd(params: { newPasswd: string, oldPasswd: string }) {
   return put<BaseResponse>('/user/passwd', params)
 }
+
+export function getUserActivity(params: { uid: string }) {
+  return post<BaseResponse>('/user/act', params)
+}

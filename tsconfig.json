@@ -24,7 +24,7 @@
     "**/*.ts",
     "**/*.tsx", 
     "src/main.js"
-  ],
+, "src/components/CalendarChart/index.jsx"  ],
   "exclude": [
     "node_modules"
   ]
