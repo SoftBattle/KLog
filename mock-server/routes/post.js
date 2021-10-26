@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const { posts, postDetails } = require('../data')
+const postInfoList = require('../data/info')
 const { genOk, genErr } = require('../libs')
 
 function getArrays(data, length) {
@@ -16,12 +17,14 @@ const router = new Router({
 
 router.post('/list', async ctx => {
   try {
+    const {pageIndex = 1, pageSize = 20} = ctx.request.body
+    const list = postInfoList.splice(pageSize * (pageIndex - 1), pageSize)
     ctx.body = {
       stat: 'ok',
       msg: '数据获取成功',
       data: {
-        posts: getArrays(posts[0], 5).concat(getArrays(posts[1], 5)),
-        total: 10
+        posts: list,
+        total: postInfoList.length
       }
     }
   } catch(err) {
