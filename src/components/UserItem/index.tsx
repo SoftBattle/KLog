@@ -14,7 +14,7 @@ const UserItem = ({ user, flag=false }: {
   const [follow, setFollow] = useState(user.follow)
   useEffect(() => {
     setFollow(user.follow)
-  })
+  }, [])
   const followOrUnfollow = async () => {
     if(follow) {
       // 执行取关操作

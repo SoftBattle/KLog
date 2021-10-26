@@ -16,7 +16,7 @@ const SORTMap = {
 }
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
-  const re = await api.post.queryPosts({pageIndex: 1, pageSize: 20, keyword: '', sort: 'ctime'})
+  const re = await api.post.queryPosts({pageIndex: 1, pageSize: 10, keyword: '', sort: 'ctime'})
   let posts: PostInfo[] = []
   let total: number
   if(re.stat === 'ok') {
