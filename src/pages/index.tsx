@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react'
+import React, { Fragment, useState, useEffect, useRef, useCallback } from 'react'
 import Tab from '../components/Tab'
 import { PostItem } from '../components/MarkDown'
 // import { usePosts } from '../hooks'
@@ -6,7 +6,6 @@ import styles from './index.module.scss'
 import { GetServerSideProps } from 'next'
 import { PostInfo } from '../interface'
 import api from '../services'
-import { useRequest } from 'ahooks'
 
 type TabType = 'Latest' | 'Popular'
 
@@ -31,7 +30,42 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   }
 }
 
-// 触底刷新机制需要完善
+function useList(sort: 'ctime' | 'views') {
+  const [list, setList] = useState<any[]>()
+  const [total, setTotal] = useState(0)
+  const [hasMore, setHasMore] = useState(false)
+  const [pageIndex, setPageIndex] = useState(1)
+  const request = useCallback(async (pageIndex: number, pageSize: number, sort: 'ctime' | 'views') => {
+    const { stat, data } = await api.post.queryPosts({
+      pageIndex,
+      pageSize,
+      keyword: '',
+      sort
+    })
+    if(stat === 'ok') {
+      setList(pre => [...pre, ...data.posts])
+      setTotal(data.total)
+      setHasMore(list.length < total)
+    }
+  }, [list, total])
+  const loadMore = useCallback(async () => {
+    if(hasMore) {
+      setPageIndex(pre => pre + 1)
+      request(pageIndex, 10, sort)
+    }
+  }, [hasMore, pageIndex])
+  useEffect(() => {
+    // 发生改变，重新初始化
+    setList([])
+    setPageIndex(1)
+    request(1, 10, sort)
+  }, [sort])
+  return {
+    list,
+    hasMore,
+    loadMore
+  }
+}
 
 const Index = (props) => {
   const [currentTab, setCurrentTab] = useState<TabType>('Latest')
@@ -99,7 +133,6 @@ const Index = (props) => {
                 setPosts([])
                 setCurrentTab('Latest')
                 document.documentElement.scrollTop = 0
-                // console.log(pageIndex)
                 setPageIndex(1)
                 const sortType = SORTMap['Latest'] as ('ctime' | 'views')
                 request(1, pageSize, sortType)
