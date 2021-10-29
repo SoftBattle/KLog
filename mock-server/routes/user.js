@@ -51,7 +51,7 @@ router.post('/search', async ctx => {
   try {
     const { keyword, pageSize = 10, pageIndex = 1 } = ctx.request.body
     const list = users.filter(user => user.uid.includes(keyword) || user.nickname.includes(keyword))
-    genOk({
+    ctx.body = genOk({
       posts: list.slice(pageSize * (pageIndex - 1), pageSize),
       total: list.length
     })

@@ -15,8 +15,7 @@ router.post('/list', async ctx => {
         return typeof k === 'string' && k.includes(keyword)
       })
     })
-    console.log(list)
-    genOk({
+    ctx.body = genOk({
       posts: list.slice(pageSize * (pageIndex - 1), pageSize),
       total: list.length
     })
@@ -31,7 +30,7 @@ router.get('/:pid', async ctx => {
   try {
     const pid = ctx.params.pid
     const data = postDetailList.find(post => post.pid === pid)
-    if(!!data) genOk(data)
+    if(!!data) ctx.body = genOk(data)
     else {
       throw new Error('post not found')
     }
