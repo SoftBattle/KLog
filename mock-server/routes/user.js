@@ -52,7 +52,7 @@ router.post('/search', async ctx => {
     const { keyword, pageSize = 10, pageIndex = 1 } = ctx.request.body
     const list = users.filter(user => user.uid.includes(keyword) || user.nickname.includes(keyword))
     ctx.body = genOk({
-      posts: list.slice(pageSize * (pageIndex - 1), pageSize),
+      posts: list.splice(pageSize * (pageIndex - 1), pageSize),
       total: list.length
     })
   } catch (error) {
@@ -97,7 +97,7 @@ router.post('/posts', async ctx => {
     const { uid, pageSize = 10, pageIndex = 1 } = ctx.request.body
     const list = postInfoList.filter(post => post.author.uid === uid)
     ctx.body = genOk({
-      posts: list.slice(pageSize * (pageIndex - 1), pageSize),
+      posts: list.splice(pageSize * (pageIndex - 1), pageSize),
       total: list.length
     })
   } catch (error) {
@@ -109,8 +109,9 @@ router.post('/stars', async ctx => {
   try {
     const { uid, pageSize = 10, pageIndex = 1 } = ctx.request.body
     const list = postDetailList.filter(({ author, star }) => star)
+    console.log(list.length)
     ctx.body = genOk({
-      posts: list.slice(pageSize * (pageIndex - 1), pageSize),
+      posts: list.splice(pageSize * (pageIndex - 1), pageSize),
       total: list.length
     })
   } catch (error) {

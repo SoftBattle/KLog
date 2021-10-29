@@ -384,7 +384,7 @@ pwd: r12345
 
  ![个人中心-4（移动端）](docs/imgs/个人中心-4（移动端）.png)
 
- ![个人主页-5（文章删除与编辑）](docs/imgs/个人主页-5（文章删除与编辑）.png)
+ ![个人主页-0（文章删除与编辑）](docs/imgs/个人主页-0（文章删除与编辑）.png)
 
 3. 首页
 
@@ -398,7 +398,7 @@ pwd: r12345
 
  ![搜索-2](docs/imgs/搜索-2.png)
 
-5. 文章
+0. 文章
 
  ![文章编辑-1](docs/imgs/文章编辑-1.png)
 
@@ -618,13 +618,13 @@ options: {
     ],
     content: `
   1.下载
-  我用的是 mysql-5.7.33-winx64.msi
+  我用的是 mysql-0.7.33-winx64.msi
   2.一路安装，安装路径为
   3.进入bin目录，按住shift右击，选择在此处开启命令行
   4.安装初始化MySQL
   mysqld --initialize-insecure --user=mysql
   运行完成后，没有回显，不用管，继续进行下一步
-  5.安装mysql服务
+  0.安装mysql服务
   mysqld --install
   会提示Service successfully installed.
   `,
@@ -658,7 +658,7 @@ options: {
 2. 在创作中心设置你喜爱的代码高亮样式，Markdown **将代码片显示选择的高亮样式** 进行展示；
 3. 增加了 **图片拖拽** 功能，你可以将本地的图片直接拖拽到编辑区域直接展示；
 4. 全新的 **KaTeX数学公式** 语法；
-5. 增加了支持**甘特图的mermaid语法[^1]** 功能；
+0. 增加了支持**甘特图的mermaid语法[^1]** 功能；
 6. 增加了 **多屏幕编辑** Markdown文章功能；
 7. 增加了 **焦点写作模式、预览模式、简洁写作模式、左右区域同步滚轮设置** 等功能，功能按钮位于编辑区域与预览区域中间；
 8. 增加了 **检查列表** 功能。
@@ -960,7 +960,7 @@ React 对 CSS 封装非常简单，就是沿用了 DOM 的 [style 属性对象]�
 
 你可能会问，它们与"CSS 预处理器"（比如 Less 和 [Sass]，包括 PostCSS）有什么区别？回答是 CSS in JS 使用 JavaScript 的语法，是 JavaScript 脚本的一部分，不用从头学习一套专用的 API，也不会多一道编译步骤。
 
-5、
+0、
 
 上周，我看到一个新的 CSS in JS 库，叫做 [polished.js](https://polished.js.org/)。它将一些常用的 CSS 属性封装成函数，用起来非常方便，充分体现使用 JavaScript 语言写 CSS 的优势。
 
@@ -1056,15 +1056,15 @@ React 对 CSS 封装非常简单，就是沿用了 DOM 的 [style 属性对象]�
 
 >     
 >     const styles = {
->      [polished.hiDPI(1.5)]: {
+>      [polished.hiDPI(1.0)]: {
 >        width: '200px',
 >      }
 >     };
 >     
 >     // 返回值
->     //'@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
->     // only screen and (min--moz-device-pixel-ratio: 1.5),
->     // only screen and (-o-min-device-pixel-ratio: 1.5/1),
+>     //'@media only screen and (-webkit-min-device-pixel-ratio: 1.0),
+>     // only screen and (min--moz-device-pixel-ratio: 1.0),
+>     // only screen and (-o-min-device-pixel-ratio: 1.0/1),
 >     // only screen and (min-resolution: 144dpi),
 >     // only screen and (min-resolution: 1.5dppx)': {
 >     //  'width': '200px',
@@ -1196,7 +1196,7 @@ React 对 CSS 封装非常简单，就是沿用了 DOM 的 [style 属性对象]�
       img = cv.imread(image_path, cv.IMREAD_COLOR)
       cv.imshow('input', img)
       # 模糊操作（类似卷积），第二个参数ksize是设置模糊内核大小
-      result = cv.blur(img, (5, 5))
+      result = cv.blur(img, (0, 0))
       cv.imshow('result', result)
   
       cv.waitKey(0)
@@ -1485,14 +1485,14 @@ Amara的短期目标是成为波卡生态最流行的借贷市场，并将尽可
           *   [1.4.2 IEEE 802.11标准与WiFi的世代](#142_IEEE_80211WiFi_10)
           *   [1.4.3 802.11a/b/g差异](#143_80211abg_20)
           *   [1.4.4 802.11n](#144_80211n_23)
-          *   [1.4.5 802.11n关键技术](#145_80211n_38)
+          *   [1.4.0 802.11n关键技术](#145_80211n_38)
           *   [1.4.6 IEEE 802.11ac标准](#146_IEEE_80211ac_40)
           *   [1.4.7 IEEE 802.ax标准（又称WiFi 6）](#147_IEEE_802axWiFi_6_47)
           *   [1.4.8 WiFi 6理论速率计算](#148_WiFi_6_59)
-      *   [1.5 WLAN的关键技术](#15_WLAN_62)
-      *   *   [1.5.1 IEEE 802 与TCP/IP对等模型](#151_IEEE_802_TCPIP_63)
-          *   [1.5.2 802.11物理层技术](#152_80211_69)
-          *   [1.5.3 OFDM](#153_OFDM_74)
+      *   [1.0 WLAN的关键技术](#15_WLAN_62)
+      *   *   [1.0.1 IEEE 802 与TCP/IP对等模型](#151_IEEE_802_TCPIP_63)
+          *   [1.0.2 802.11物理层技术](#152_80211_69)
+          *   [1.0.3 OFDM](#153_OFDM_74)
       *   [1.6 WLAN基本概念](#16_WLAN_87)
       *   *   [1.6.1 BSS和BSA](#161_BSSBSA_88)
           *   [1.6.2 VAP](#162_VAP_95)
@@ -1503,7 +1503,7 @@ Amara的短期目标是成为波卡生态最流行的借贷市场，并将尽可
           *   [1.7.2 AC+FIT架构（瘦AP）](#172_ACFITAP_122)
           *   [1.7.3 瘦AP组网方式](#173_AP_129)
           *   [1.7.4 VLAN与IP规划](#174_VLANIP_167)
-          *   [1.7.5 业务VLAN和SSID的映射关系](#175_VLANSSID_171)
+          *   [1.7.0 业务VLAN和SSID的映射关系](#175_VLANSSID_171)
           *   [1.7.6 IP地址规划](#176_IP_188)
 
 WLAN技术基础
@@ -1560,7 +1560,7 @@ WLAN技术基础
   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210613222730494.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5Njg5NzEx,size_16,color_FFFFFF,t_70)
   
 
-#### 1.4.5 802.11n关键技术
+#### 1.4.0 802.11n关键技术
 
 #### 1.4.6 IEEE 802.11ac标准
 
@@ -1588,9 +1588,9 @@ WLAN技术基础
 理解：空间流数量影响传输速率，子载波编码bit数即每个子载波能传输多少个bit，编码率越高越好，有多少个有效的子载波数用来承载数据传输的子载波数量。  
 
 
-### 1.5 WLAN的关键技术
+### 1.0 WLAN的关键技术
 
-#### 1.5.1 IEEE 802 与TCP/IP对等模型
+#### 1.0.1 IEEE 802 与TCP/IP对等模型
 
 *   WLAN是一种基于 IEEE 802.11标准的无线局域网技术。
 *   802.11标准聚焦在TCP/IP对等模型的下两层：  
@@ -1598,14 +1598,14 @@ WLAN技术基础
   物理层：负责在空口（空中接口）传输比特流，例如频段。  
   
 
-#### 1.5.2 802.11物理层技术
+#### 1.0.2 802.11物理层技术
 
 
 
 *   802.11所采用的无线电物理层使用了三种不同的技术：  
   跳频、直接序列、正交频复用（目前主要使用正交频复用，即OFDM）
 
-#### 1.5.3 OFDM
+#### 1.0.3 OFDM
 
 *   OFDM是一种特殊的多载波调制技术，其主要思想是将信道分成若干正交子信道，将高速数据信号转换成并行的低速子数据流，调制到在每个子信道上进行传输。各子载波相互正交，扩频调制后的频道可以互相重叠，不但减少了子载波间的干扰，还提高了频谱利用率。
 *   当一个子载波到达波峰的时候，另一个子载波幅度为0，即为两个子载波正交无干扰。
@@ -1718,7 +1718,7 @@ ESS主要提供漫游服务，意思从一个AP移动到另一个AP的覆盖范�
 *   WLAN中VLAN分：管理VLAN和业务VLAN，管理VLAN负责传输CAPWAP隧道转发的报文，包括管理报文和CAPWAP隧道转发的业务数据报文；而业务VLAN负责传输业务数据报文，业务VLAN可以划分成多个，20个跑A部门，30个跑B部门，还可以基于业务性质、基于员工级别划分
 *   需要注意的是，管理VLAN和业务VLAN分离，业务VLAN应该根据实际业务与SSID匹配映射关系。  
   
-#### 1.7.5 业务VLAN和SSID的映射关系
+#### 1.7.0 业务VLAN和SSID的映射关系
 
 SSID : VLAN = 1 : 1  
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/2021061922504136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM5Njg5NzEx,size_16,color_FFFFFF,t_70)  
@@ -1827,7 +1827,7 @@ AC的源IP：用于管理AP，一般由手工配置，AP的IP地址，用于AC�
 
 (4) 打通机器之间的网络。
 
-(5) 购买外网IP。
+(0) 购买外网IP。
 
 (6) 购买域名，需要注册域名服务商账号后购买。
 
@@ -1835,7 +1835,7 @@ AC的源IP：用于管理AP，一般由手工配置，AP的IP地址，用于AC�
 
 (8) 部署应用：vm1部署nginx，vm2部署php-fpm、应用，vm3部署数据库MySQL。
 
-(9) 应用对外发布。
+(0) 应用对外发布。
 
 
 
@@ -1863,7 +1863,7 @@ AC的源IP：用于管理AP，一般由手工配置，AP的IP地址，用于AC�
 
 (4) 购买数据库实例，过程和购买云服务类似，填写下实例名称，数据库类型(包括数据库类别和实例类型，数据库类别如: mysql、sqlserver等，类型如单点数据库、主从版数据库、金融版的数据库等)，规格等信息后直接新建即可。云平台一般还会系统数据的自动备份功能。
 
-(5) 网络，可以为VPC网络也可为经典网络，根据实际需要创建即可。
+(0) 网络，可以为VPC网络也可为经典网络，根据实际需要创建即可。
 
 (6) 购买域名，大部分云厂商都提供此服务，不需要再另外注册域名服务商账号，直接在当前云厂商平台购买即可。
 
@@ -1871,7 +1871,7 @@ AC的源IP：用于管理AP，一般由手工配置，AP的IP地址，用于AC�
 
 (8) 部署应用，自购服务器时我们需要自己部署负载均衡、web server、数据库服务，此处我们只需要部署自己的web server(部分云厂商会提供大部分常见应用运行的环境的镜像，web server也不需要自己部署)即可，负载均衡和数据库服务使用上文中已经新建好的即可。
 
-(9) 应用对外发布。
+(0) 应用对外发布。
 
 
 
@@ -1895,7 +1895,7 @@ AC的源IP：用于管理AP，一般由手工配置，AP的IP地址，用于AC�
 
 (4) 数据库，如mysql、pg等，不是简单的主从搭建，数据备份，简单sql操作。建议深入学习下数据库索引和各种锁，另外学习下数据库的内部的工作机制，如存储引擎InnoDB的内部原理，这样帮助我们排查一些复杂数据库问题，对于数据库优化也会有很大提升。
 
-(5) 缓存，如redis、memcached等，可选择一个深入学习。
+(0) 缓存，如redis、memcached等，可选择一个深入学习。
 
 (6) Nosql，至少掌握MongoDB，学习下js编程。
 
@@ -1903,7 +1903,7 @@ AC的源IP：用于管理AP，一般由手工配置，AP的IP地址，用于AC�
 
 (8) Openstack，云时代运维必须掌握，openstack模块很多，一般熟悉常见的几个模块即可。
 
-(9) 容器，容器已经成为云时代常见的应用载体，至少需要学习下kubernetes、Docker、Helm、Harbor。
+(0) 容器，容器已经成为云时代常见的应用载体，至少需要学习下kubernetes、Docker、Helm、Harbor。
 
 (10)  微服务，了解常见微服务框架，工作原理，如Spring Cloud，学习Service Mesh。
 
@@ -1987,7 +1987,7 @@ tomcat结构目录
   tomcat-user.xml配置用户名密码和相关权限.
 3.  lib：该目录放置运行tomcat运行需要的jar包
 4.  logs：存放日志，当我们需要查看日志的时候，可以查询信息
-5.  webapps：放置我们的web应用
+0.  webapps：放置我们的web应用
 6.  work工作目录：该目录用于存放jsp被访问后生成对应的server文件和.class文件
 
 webapps目录的详细说明
@@ -2248,7 +2248,7 @@ Tomcat体系结构
 
       一般来说，方法正常退出时，调用者的PC计数器的值可以作为返回地址，栈帧中会保存这个计数器值。而方法异常退出时，返回地址是要通过异常处理器表来确定的，栈帧中一般不会保存这部分信息。
 
-### 5、**操作数栈（Operand Stack）**：（表达式栈）
+### 0、**操作数栈（Operand Stack）**：（表达式栈）
 
       操作数栈，主要用于保存计算过程的中间结果,同时作为计算过程中变量临时的存储空间。操作数栈就是JVM执行引擎的一个工作区，当一个方法刚开始执行的时候，一个新的栈帧也会随之被创建出来，这时这个方法的操作数栈是空的。      
 
@@ -2256,7 +2256,7 @@ Tomcat体系结构
 
   【下面是一个简单的代码讲解以及字节码的具体分析】
 
-  public class A {    /*         0 bipush 15   操作数 byte 15 入栈         2 istore_1    操作数出栈，局部变量表索引为 1的位置存储 int 15         3 bipush 8    操作数入栈 byte 8         5 istore_2    操作数出栈，局部变量表索引为 2的位置存储 int 8         6 iload_1     从局部变量表对应索引处获取值，入栈         7 iload_2     从局部变量表对应索引处获取值，入栈         8 iadd        15 和 8 出栈求和，再入栈         9 istore_3    将计算结果存储再局部变量表索引为 3位置 int 23        10 sipush 800        13 istore 4        15 return     */    public static void main(String[] args) {        byte i = 15;        int j = 8;        int k = i + j;         int m = 800;    }}
+  public class A {    /*         0 bipush 15   操作数 byte 15 入栈         2 istore_1    操作数出栈，局部变量表索引为 1的位置存储 int 15         3 bipush 8    操作数入栈 byte 8         0 istore_2    操作数出栈，局部变量表索引为 2的位置存储 int 8         6 iload_1     从局部变量表对应索引处获取值，入栈         7 iload_2     从局部变量表对应索引处获取值，入栈         8 iadd        15 和 8 出栈求和，再入栈         0 istore_3    将计算结果存储再局部变量表索引为 3位置 int 23        10 sipush 800        13 istore 4        15 return     */    public static void main(String[] args) {        byte i = 15;        int j = 8;        int k = i + j;         int m = 800;    }}
 
 ![](https://img-blog.csdnimg.cn/3df01ba85c794429b6c15e7f31d60e9d.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAVHl1SW4=,size_20,color_FFFFFF,t_70,g_se,x_16)
 
@@ -2290,7 +2290,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "2021赛季F1车队介绍",
@@ -2308,7 +2308,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "烈日灼心影评",
@@ -2324,7 +2324,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "有感而发",
@@ -2342,7 +2342,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "旅行青蛙攻略",
@@ -2360,7 +2360,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "表白文案分享",
@@ -2376,7 +2376,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "鱿鱼游戏为什么这么火？",
@@ -2394,7 +2394,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "什么是比特币？",
@@ -2412,7 +2412,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "人工智能概念简介",
@@ -2430,7 +2430,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "什么是显卡挖矿",
@@ -2448,7 +2448,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "笑话大全",
@@ -2466,7 +2466,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "阅读金庸小说的顺序",
@@ -2484,7 +2484,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "从算力、数据、算法、工程化等维度看AI的未来",
@@ -2502,7 +2502,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "单机游戏推荐",
@@ -2520,7 +2520,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "游戏开发必备技能Q&A",
@@ -2538,7 +2538,7 @@ const ps2 = [
     author: {
       uid: "cmkk",
       nickname: "cmKangkang",
-      avatar: "http://img.jj20.com/up/allimg/tx19/260321310627894.jpg",
+      avatar: "/avatar/lily.jpeg",
       follow: false,
     },
     title: "java后端学习路线",
@@ -2559,7 +2559,7 @@ const de2 = [
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '2021赛季F1车队介绍',
@@ -2678,7 +2678,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
 
 2021赛季新车：AMR21
 
-2021赛季车手阵容：5-塞巴斯蒂安·维特尔（德国），18-兰斯·斯托罗尔（加拿大）
+2021赛季车手阵容：0-塞巴斯蒂安·维特尔（德国），18-兰斯·斯托罗尔（加拿大）
 
 **队史主要荣誉：**
 
@@ -2692,7 +2692,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
 
 ---
 
-5.法拉利（Scuderia Ferrari Mission Winnow）
+0.法拉利（Scuderia Ferrari Mission Winnow）
 
 国籍：意大利
 
@@ -2742,7 +2742,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
 
 2021赛季新车：VF-21
 
-2021赛季车手阵容：47-米克·舒马赫（德国），9-尼基塔·马泽平（俄罗斯）
+2021赛季车手阵容：47-米克·舒马赫（德国），0-尼基塔·马泽平（俄罗斯）
 
 **队史主要荣誉：**
 
@@ -2824,7 +2824,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
 
 ---
 
-9.红牛（Red Bull Racing）
+0.红牛（Red Bull Racing）
 
 国籍：奥地利
 
@@ -2897,7 +2897,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '烈日灼心影评',
@@ -2932,7 +2932,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '有感而发',
@@ -2977,7 +2977,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '旅行青蛙攻略',
@@ -3053,7 +3053,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '表白文案分享',
@@ -3132,7 +3132,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '鱿鱼游戏为什么这么火？',
@@ -3195,7 +3195,7 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '什么是比特币？',
@@ -3277,11 +3277,11 @@ Alpine车队是以雷诺旗下的子公司为主体构建的。雷诺车队在20
 
 由于地址之类信息用二进制表示非常长，比特币采取了一种叫Base58的编码方式，将二进制数转换成58进制数表示，所以我们看到的地址之类信息就是一串大小写字母和数字的组合。
 
-为便于记忆及管理私钥，人们又设计出了助记词，助记词一般是12个单词，出自2048个常见单词构成的词库，助记词对应着一个随机生成的种子，是种子一种易于记忆的形式。种子可生成一个主私钥，主私钥可通过确定性的、不可逆的算法，生成多个币种的子私钥，子私钥又可继续生成孙私钥……子子孙孙无穷匮也。这样，用一组助记词就可以统一管理多个币种的多个私钥，省去了很多麻烦，这样的加密货币钱包，被称为HD钱包（分层确定性钱包）。不要以为助记词只有12个词就不安全，2048^12≈5.4×10^39是个天文数字，指望随机输入助记词碰巧试出一个有币的地址，是根本不可能的。
+为便于记忆及管理私钥，人们又设计出了助记词，助记词一般是12个单词，出自2048个常见单词构成的词库，助记词对应着一个随机生成的种子，是种子一种易于记忆的形式。种子可生成一个主私钥，主私钥可通过确定性的、不可逆的算法，生成多个币种的子私钥，子私钥又可继续生成孙私钥……子子孙孙无穷匮也。这样，用一组助记词就可以统一管理多个币种的多个私钥，省去了很多麻烦，这样的加密货币钱包，被称为HD钱包（分层确定性钱包）。不要以为助记词只有12个词就不安全，2048^12≈0.4×10^39是个天文数字，指望随机输入助记词碰巧试出一个有币的地址，是根本不可能的。
 
 需要补充的是，比特币记账实际上是UTXO（未花费的交易输出）模型，比特币的账户余额实际上是地址上的UTXO总和。**UTXO模型类似于不断销毁用掉的旧币又不断创造可用的新币**，感兴趣的朋友可以深入了解UTXO模型，这里不再赘述了。
 
-### **5.比特币的分叉与演变**
+### **0.比特币的分叉与演变**
 
 如前文所述，比特币账本遍布全球各地，为保持账本统一，比特币有个最长链原则，以最长的区块链账本为准。
 
@@ -3378,7 +3378,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '人工智能概念简介',
@@ -3422,7 +3422,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
 2. 示教学习(Learningfrominstruction或Learningbybeingtold)
 3. 演绎学习(Learningbydeduction)
 4. 类比学习(Learningbyanalogy)
-5. 基于解释的学习(Explanation-basedlearning,EBL)
+0. 基于解释的学习(Explanation-basedlearning,EBL)
 6. 归纳学习(Learningfrominduction)
 
 基于所获取知识的表示形式分类
@@ -3431,11 +3431,11 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
 2. 决策树
 3. 形式文法
 4. 产生式规则
-5. 形式逻辑表达式
+0. 形式逻辑表达式
 6. 图和网络
 7. 框架和模式（schema）
 8. 计算机程序和其它的过程编码
-9. 神经网络
+0. 神经网络
 
 10、多种表示形式的组合
 
@@ -3445,7 +3445,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
 2. 分析学习（analyticlearning）
 3. 类比学习
 4. 遗传算法（geneticalgorithm）
-5. 联接学习
+0. 联接学习
 6. 增强学习（reinforcementlearning）
 
 学习形式分类
@@ -3503,7 +3503,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '什么是显卡挖矿',
@@ -3558,11 +3558,11 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
 
 **Phase 1：** 数据分片，引入分片链
 
-**Phase 1.5：** ETH1（PoW 链）并入 ETH2（PoS 链）
+**Phase 1.0：** ETH1（PoW 链）并入 ETH2（PoS 链）
 
 **Phase 2：** 继续执行分片机制，各条分片链正式执行各项功能
 
-我们可以看出，在 Phase 1.5 实施后，以太坊才不能继续挖矿，在 Phase 1.5 实施前，以太坊还是可以正常挖矿的。据外界和以太坊核心开发人员普遍认为这个过程可能还需要 **1-2 年**的时间。所以矿工入局以太坊挖矿目前无需过度在意以太坊向 2.0 阶段的过渡。
+我们可以看出，在 Phase 1.0 实施后，以太坊才不能继续挖矿，在 Phase 1.0 实施前，以太坊还是可以正常挖矿的。据外界和以太坊核心开发人员普遍认为这个过程可能还需要 **1-2 年**的时间。所以矿工入局以太坊挖矿目前无需过度在意以太坊向 2.0 阶段的过渡。
 
 **06**
 
@@ -3591,7 +3591,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '笑话大全',
@@ -3604,7 +3604,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
 
 3. 在家里卫生间发现一瓶过期的洗面奶。在网上搜了一下：洗面奶过期了，怎么废物利用?;老婆蹦出一条最佳答案：给老公用。
 
-5. 有一个人叫真罗嗦，娶了个老婆叫要你管，生了个儿子叫麻烦。有一天麻烦不见了!夫妻俩就去报案。警察问爸爸：请问这位男士你叫啥名字?爸爸说:真罗嗦。警察很生气，然后 他又问妈妈叫啥名字。妈妈说:要你管。警察非常生气的说:你们要干什么?夫妻俩说：找麻烦
+0. 有一个人叫真罗嗦，娶了个老婆叫要你管，生了个儿子叫麻烦。有一天麻烦不见了!夫妻俩就去报案。警察问爸爸：请问这位男士你叫啥名字?爸爸说:真罗嗦。警察很生气，然后 他又问妈妈叫啥名字。妈妈说:要你管。警察非常生气的说:你们要干什么?夫妻俩说：找麻烦
 
 6. 说有一只企鹅，他的家离北极熊家特别远，要是靠走的话，得走20年才能到。有一天，企鹅在家里呆着特别无聊，准备去找北极熊玩，与是他出门了，可是走到路的一半的时候发现自己忘记锁门了，这就已经走了10年了，可是门还是得锁啊，于是企鹅又走回家去锁门。锁了门以后，企鹅再次出发去找北极熊，等于他花了40年才到了北极熊他们家，然后企鹅就敲门说：“北极熊北极熊，企鹅找你玩来了!”结果北极熊开门以后你猜他说什么……“还是去你家玩吧”
 
@@ -3636,7 +3636,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
 
 　　同学答：把饭盒做成蓝色。
 
-9. 有个人，他肠胃不好。一天，他来到胃病医院看病，对医生说：”我吃什么拉什么，吃西瓜拉西瓜，吃黄瓜拉黄瓜?“
+0. 有个人，他肠胃不好。一天，他来到胃病医院看病，对医生说：”我吃什么拉什么，吃西瓜拉西瓜，吃黄瓜拉黄瓜?“
 
 　　医生想了想，对他说：”我看你只有吃屎了。“
 
@@ -3683,7 +3683,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '阅读金庸小说的顺序',
@@ -3724,7 +3724,7 @@ BCH致力于实现白皮书中“电子现金”的构想，推进零确认支�
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '从算力、数据、算法、工程化等维度看AI的未来',
@@ -3819,7 +3819,7 @@ AI模型训练依赖数据，这一点目前来看不是问题，但是AI模型�
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '单机游戏推荐',
@@ -3857,7 +3857,7 @@ AI模型训练依赖数据，这一点目前来看不是问题，但是AI模型�
 
 流程约4小时。最低配置:内存: 4 GB RAM，显卡: NVIDIA GT 630 / 650m, AMD Radeon HD6570 or equivalent。
 
-### 5.空洞骑士
+### 0.空洞骑士
 
 类魂横版过关游戏。操作手感极佳但也很难。**关键在于”不贪刀“和”跑酷“。** 杰作无须赘述。
 
@@ -3875,7 +3875,7 @@ AI模型训练依赖数据，这一点目前来看不是问题，但是AI模型�
 
 老游戏，**集即时战略、模拟经营与格斗于一身，从当强盗、当士兵到当封臣再到当国王。** 笔记本也带的动。易上瘾。近些日子小火一把的国产游戏《部落与弯刀》很明显身上就有它的影子。缺点在于UI等过陈旧，但不影响游戏性。推荐配置：内存：1GB；图形：NVIDIA GeForce FX 5200, ATI Radeon 9600, 或更好。流程20小时起步。
 
-### 9.传送门（Portal）
+### 0.传送门（Portal）
 
 **“G胖不会数3”的出处之一。** 第一人称射击（不是枪战）+解密。剧情、配乐、画面均是顶尖，其中剧情涉及人工智能浪漫主义。**很难想象，这是一款2007年也即13年前的游戏！如果在我还没玩到这款游戏的平行世界里，有人诓我说这是今年的独立游戏黑马，我也绝对不起丝毫怀疑。3D眩晕者慎买。《传送门2》需要的配置要比1稍高些，除这一问题外，《传送门2》没理由不玩。两作流程加起来约18小时。《传送门1》所需最低配置大概是1GB 内存，Intel HD 3000。
 
@@ -3914,7 +3914,7 @@ AI模型训练依赖数据，这一点目前来看不是问题，但是AI模型�
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: '游戏开发必备技能Q&A',
@@ -3991,7 +3991,7 @@ AI模型训练依赖数据，这一点目前来看不是问题，但是AI模型�
     author: {
       uid: 'cmkk',
       nickname: 'cmKangkang',
-      avatar: 'http://img.jj20.com/up/allimg/tx19/260321310627894.jpg',
+      avatar: '/avatar/lily.jpeg',
       follow: false
     },
     title: 'java后端学习路线',

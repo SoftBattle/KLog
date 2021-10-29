@@ -16,7 +16,7 @@ router.post('/list', async ctx => {
       })
     })
     ctx.body = genOk({
-      posts: list.slice(pageSize * (pageIndex - 1), pageSize),
+      posts: list.splice(pageSize * (pageIndex - 1), pageSize),
       total: list.length
     })
   } catch(err) {
