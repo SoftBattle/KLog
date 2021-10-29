@@ -1,7 +1,7 @@
-export interface BaseResponse {
+export interface BaseResponse<T = any> {
   stat: string,
   msg?: string,
-  data: any
+  data: T
 }
 
 export interface UserInfo {

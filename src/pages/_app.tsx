@@ -9,8 +9,6 @@ import 'highlight.js/styles/atom-one-dark.css'
 import 'bytemd/dist/index.min.css'
 import '../styles/animation.scss'
 
-// import '../main'
-
 import { store, unsubscribe } from '../store'
 
 const App = ({ Component, pageProps }: AppProps) => {

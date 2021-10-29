@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     case "posts":
       dataRe = await api.user.queryUserPosts({
         pageIndex: 1,
-        pageSize: 20,
+        pageSize: 10,
         keyword: "",
         sort: "ctime",
         uid: uid as string,
@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     case "stars":
       dataRe = await api.user.queryUserStars({
         pageIndex: 1,
-        pageSize: 20,
+        pageSize: 10,
         keyword: "",
         sort: "ctime",
         uid: uid as string,
@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     case "follows":
       dataRe = await api.user.queryUserFollows({
         pageIndex: 1,
-        pageSize: 20,
+        pageSize: 10,
         keyword: "",
         sort: "ctime",
         uid: uid as string,
@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     case "followers":
       dataRe = await api.user.queryUserFollowers({
         pageIndex: 1,
-        pageSize: 20,
+        pageSize: 10,
         keyword: "",
         sort: "ctime",
         uid: uid as string,

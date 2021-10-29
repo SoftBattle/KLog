@@ -1,7 +1,6 @@
 const Router = require('koa-router')
 const { genOk, genErr } = require('../libs')
-
-const { users } = require('../data')
+const { users, tokens } = require('../data')
 
 const router = new Router({
   prefix: '/api/auth'
@@ -19,7 +18,7 @@ router.post('/login', async ctx => {
           uid: user.uid,
           nickname: user.nickname,
           avatar: user.avatar,
-          token: 'hduyewdgqw23167147hdebfew'
+          token: tokens.find(tk => tk.uid === uid)
         }
         flag = true
       }

@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const { posts, postDetails, calendar } = require('../data')
+const { postInfoList, postDetailList, calendar, tokens, users } = require('../data')
 const { genOk, genErr } = require('../libs')
 
 const router = new Router({
@@ -35,89 +35,25 @@ router.post('/unfollow', async ctx => {
 router.post('/info', async ctx => {
   try {
     const { uid } = ctx.request.body
-    let id = 'cmkk', name = 'cmKangkang'
-    if(uid !== 'cmkk') {
-      id = 'cmyy'
-      name = 'cmYY'
+    if(!uid) {
+      ctx.body = genErr('Bad_Request', '用户ID不能为空')
+    } else if (users.findIndex(u => u.uid === uid) < 0) {
+      ctx.body = genErr('User_Not_Exist', '用户不存在')
+    } else {
+      ctx.body = genOk(users.find(u => u.uid === uid))
     }
-    ctx.body = genOk({
-      uid: id,
-      nickname: name,
-      avatar: '/avatar/me.jpg',
-      follow: false
-    })
   } catch (error) {
-    ctx.body = genErr()
+    ctx.body = genErr('Internal_Server_Error')
   }
 })
 
 router.post('/search', async ctx => {
   try {
-    const { keyword } = ctx.request.body
-    ctx.body = genOk({
-      users: [
-        {
-          uid: 'cmkk',
-          nickname: 'cmKangkang',
-          avatar: '/avatar/me.jpg',
-          follow: false
-        },
-        {
-          uid: keyword,
-          nickname: 'cm' + keyword,
-          avatar: '/avatar/me.jpg',
-          follow: true
-        },
-        {
-          uid: 'cmkk',
-          nickname: 'cmKangkang',
-          avatar: '/avatar/me.jpg',
-          follow: false
-        },
-        {
-          uid: keyword,
-          nickname: 'cm' + keyword,
-          avatar: '/avatar/me.jpg',
-          follow: true
-        },
-        {
-          uid: 'cmkk',
-          nickname: 'cmKangkang',
-          avatar: '/avatar/me.jpg',
-          follow: false
-        },
-        {
-          uid: keyword,
-          nickname: 'cm' + keyword,
-          avatar: '/avatar/me.jpg',
-          follow: true
-        },
-        {
-          uid: 'cmkk',
-          nickname: 'cmKangkang',
-          avatar: '/avatar/me.jpg',
-          follow: false
-        },
-        {
-          uid: keyword,
-          nickname: 'cm' + keyword,
-          avatar: '/avatar/me.jpg',
-          follow: true
-        },
-        {
-          uid: 'cmkk',
-          nickname: 'cmKangkang',
-          avatar: '/avatar/me.jpg',
-          follow: false
-        },
-        {
-          uid: keyword,
-          nickname: 'cm' + keyword,
-          avatar: '/avatar/me.jpg',
-          follow: true
-        },
-      ],
-      total: 100
+    const { keyword, pageSize = 10, pageIndex = 1 } = ctx.request.body
+    const list = users.filter(user => user.uid.includes(keyword) || user.nickname.includes(keyword))
+    genOk({
+      posts: list.slice(pageSize * (pageIndex - 1), pageSize),
+      total: list.length
     })
   } catch (error) {
     ctx.body = genErr()
@@ -127,14 +63,13 @@ router.post('/search', async ctx => {
 router.post('/follows', async ctx => {
   try {
     const { uid } = ctx.request.body
-    ctx.body = genOk({
-      users: [...getArrays({
-        uid: 'cmyy',
-        nickname: 'cmYY',
-        avatar: '/avatar/me.jpg',
-        follow: true
-      }, 10)],
-      total: 100
+    if(uid === 'cmkk') ctx.body = genOk({
+      users: [users[1]],
+      total: 1
+    })
+    else ctx.body = genOk({
+      users: [users[0]],
+      total: 1
     })
   } catch (error) {
     ctx.body = genErr()
@@ -144,14 +79,13 @@ router.post('/follows', async ctx => {
 router.post('/followers', async ctx => {
   try {
     const { uid } = ctx.request.body
-    ctx.body = genOk({
-      users: getArrays({
-        uid: 'cmkk',
-        nickname: 'cmKangkang',
-        avatar: '/avatar/me.jpg',
-        follow: false
-      }, 10),
-      total: 100
+    if(uid === 'cmkk') ctx.body = genOk({
+      users: [users[1]],
+      total: 1
+    })
+    else ctx.body = genOk({
+      users: [users[0]],
+      total: 1
     })
   } catch (error) {
     ctx.body = genErr()
@@ -160,10 +94,11 @@ router.post('/followers', async ctx => {
 
 router.post('/posts', async ctx => {
   try {
-    const { uid } = ctx.request.body
+    const { uid, pageSize = 10, pageIndex = 1 } = ctx.request.body
+    const list = postInfoList.filter(post => post.author.uid === uid)
     ctx.body = genOk({
-      posts: [...getArrays(posts[0], 10)],
-      total: 40
+      posts: list.slice(pageSize * (pageIndex - 1), pageSize),
+      total: list.length
     })
   } catch (error) {
     ctx.body = genErr()
@@ -172,9 +107,11 @@ router.post('/posts', async ctx => {
 
 router.post('/stars', async ctx => {
   try {
+    const { uid, pageSize = 10, pageIndex = 1 } = ctx.request.body
+    const list = postDetailList.filter(({ author, star }) => star)
     ctx.body = genOk({
-      posts: [...getArrays(posts[1], 10)],
-      total: 20
+      posts: list.slice(pageSize * (pageIndex - 1), pageSize),
+      total: list.length
     })
   } catch (error) {
     ctx.body = genErr()
