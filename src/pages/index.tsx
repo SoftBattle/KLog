@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect, useRef, useCallback } from 'react'
 import Tab from '../components/Tab'
 import { PostItem } from '../components/MarkDown'
-import { useDebounceFn } from 'ahooks'
+import { useDebounce } from 'ahooks'
 import styles from './index.module.scss'
 import { GetServerSideProps } from 'next'
 import { PostInfo } from '../interface'
@@ -30,70 +30,43 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   }
 }
 
-function useList(sort: 'ctime' | 'views') {
-  const [list, setList] = useState<any[]>()
-  const [total, setTotal] = useState(0)
-  const [hasMore, setHasMore] = useState(false)
-  const [pageIndex, setPageIndex] = useState(1)
-  const request = useCallback(async (pageIndex: number, pageSize: number, sort: 'ctime' | 'views', isInit = false) => {
-    const { stat, data } = await api.post.queryPosts({
-      pageIndex,
-      pageSize,
-      keyword: '',
-      sort
-    })
-    if(stat === 'ok') {
-      if(!isInit) {
-        setHasMore(list.length + data.posts.length < total)
-        setList(pre => [...pre, ...data.posts])
-      } else {
-        setTotal(data.total)
-        setList(data.posts)
-        setHasMore(data.posts.length < data.total)
-      }
-    }
-  }, [list, total])
-  const loadMore = useCallback(async () => {
-    if(hasMore) {
-      setPageIndex(pre => pre + 1)
-      request(pageIndex, 10, sort)
-    }
-  }, [hasMore, pageIndex])
-  useEffect(() => {
-    // 发生改变，重新初始化
-    setList([])
-    setPageIndex(1)
-    request(1, 10, sort, true)
-  }, [sort])
-  return {
-    list,
-    total,
-    hasMore,
-    loadMore
-  }
-}
-
 const Index = (props) => {
   const [currentTab, setCurrentTab] = useState<TabType>('Latest')
   const [pageIndex, setPageIndex] = useState(1)
   const pageSize = 10
   const [posts, setPosts] = useState<PostInfo[]>(props.posts || [])
-  const [toBottom, setToBottom] = useState(false)
+  const total = props.total
 
-  async function request(pageIndex: number, pageSize: number, sort: 'ctime' | 'views') {
+  async function request(pageIndex: number, pageSize: number, sort: 'ctime' | 'views', isInit = false) {
     const re = await api.post.queryPosts({pageIndex, pageSize, keyword: '', sort})
+      if(re.stat === 'ok') {
+        if(posts.length < re.data.total) {
+          setPosts(ps => [...ps, ...re.data.posts])
+          setPageIndex(idx => idx + 1)
+        }
+      }
+  }
+
+  const loadMore = useCallback(async () => {
+    if(posts.length >= total) return
+    const re = await api.post.queryPosts({pageIndex: pageIndex + 1, pageSize, keyword: '', sort: SORTMap[currentTab] as 'ctime' | 'views'})
     if(re.stat === 'ok') {
       if(posts.length < re.data.total) {
         setPosts(ps => [...ps, ...re.data.posts])
         setPageIndex(idx => idx + 1)
       }
     }
-  }
+  }, [pageIndex])
 
   useEffect(() => {
-    const sortType = SORTMap[currentTab] as ('ctime' | 'views')
-    (pageIndex > 1 && toBottom) && request(pageIndex, pageSize, sortType)
-  }, [toBottom])
+    const init = async () => {
+      const re = await api.post.queryPosts({pageIndex: 1, pageSize, keyword: '', sort: SORTMap[currentTab] as 'ctime' | 'views' })
+      if(re.stat === 'ok') {
+        setPosts(ps => [...ps, ...re.data.posts])
+      }
+    }
+    init()
+  }, [currentTab])
 
   useEffect(() => {
     const handleScroll = (e) => {
@@ -101,16 +74,14 @@ const Index = (props) => {
       const scrollTop = document.documentElement.scrollTop
       const scrollHeight = document.documentElement.scrollHeight
       if(Math.ceil(scrollTop + clientHeight) >= scrollHeight) {
-        setToBottom(true)
-      } else {
-        setToBottom(false)
+        loadMore()
       }
     }
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [loadMore])
 
   const getPostsList = () => posts.map((post, index) => {
     return <PostItem post={post} key={index} />
@@ -119,7 +90,6 @@ const Index = (props) => {
   return (
     <Fragment>
       <div className={styles.show}>
-        {/* 欢迎展示区 */}
         <div className={styles.slogan}>
           <span>We are </span>
           <span>talking here...</span>
@@ -127,7 +97,6 @@ const Index = (props) => {
       </div>
 
       <div className={styles.page_tab}>
-        {/* tab菜单区 */}
         <Tab 
           tabs={[
             {
@@ -138,8 +107,6 @@ const Index = (props) => {
                 setCurrentTab('Latest')
                 document.documentElement.scrollTop = 0
                 setPageIndex(1)
-                const sortType = SORTMap['Latest'] as ('ctime' | 'views')
-                request(1, pageSize, sortType)
               }
             },
             {
@@ -147,11 +114,8 @@ const Index = (props) => {
               content: <div>最热</div>,
               onClick: async () => {
                 setCurrentTab('Popular')
-                setPosts([])
                 document.documentElement.scrollTop = 0
                 setPageIndex(1)
-                const sortType = SORTMap['Popular'] as ('ctime' | 'views')
-                request(1, pageSize, sortType)
               }
             }
           ]} 
