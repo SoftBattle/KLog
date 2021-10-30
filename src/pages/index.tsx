@@ -18,6 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   const re = await api.post.queryPosts({pageIndex: 1, pageSize: 10, keyword: '', sort: 'ctime'})
   let posts: PostInfo[] = []
   let total: number
+  console.log(re)
   if(re.stat === 'ok') {
     posts = re.data.posts
     total = re.data.total || 0
@@ -36,16 +37,6 @@ const Index = (props) => {
   const pageSize = 10
   const [posts, setPosts] = useState<PostInfo[]>(props.posts || [])
   const total = props.total
-
-  async function request(pageIndex: number, pageSize: number, sort: 'ctime' | 'views', isInit = false) {
-    const re = await api.post.queryPosts({pageIndex, pageSize, keyword: '', sort})
-      if(re.stat === 'ok') {
-        if(posts.length < re.data.total) {
-          setPosts(ps => [...ps, ...re.data.posts])
-          setPageIndex(idx => idx + 1)
-        }
-      }
-  }
 
   const loadMore = useCallback(async () => {
     if(posts.length >= total) return
@@ -103,7 +94,6 @@ const Index = (props) => {
               name: 'Latest',
               content: <div>最新</div>,
               onClick: async () => {
-                setPosts([])
                 setCurrentTab('Latest')
                 document.documentElement.scrollTop = 0
                 setPageIndex(1)

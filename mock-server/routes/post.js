@@ -12,7 +12,7 @@ router.post('/list', async (ctx) => {
       keyword = '',
       pageIndex = 1,
       pageSize = 10,
-      sort,
+      sort = 'ctime',
     } = ctx.request.body
     const list = postInfoList.filter((post) => {
       const temp = Object.values(post)
@@ -20,14 +20,16 @@ router.post('/list', async (ctx) => {
         return typeof k === 'string' && k.includes(keyword)
       })
     })
+    const length = list.length
+    if(sort !== 'ctime') {
+      list.sort((a, b) => a.views - b.views)
+    }
     ctx.body = genOk({
       posts: list.splice(pageSize * (pageIndex - 1), pageSize),
-      total: list.length,
+      total: length,
     })
   } catch (err) {
-    ctx.body = {
-      stat: 'err',
-    }
+    ctx.body = genErr()
   }
 })
 

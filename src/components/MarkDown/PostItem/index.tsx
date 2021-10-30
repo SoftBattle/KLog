@@ -40,13 +40,6 @@ export default function PostItem({ post, children }: {
             <span>{post.title}</span>
           </a>
         </Link>
-
-        {/* <div className={styles.subTitle}>
-          <Link href={`/post/${post.pid}`}>
-            <span>{post.subTitle}</span>
-          </Link>
-        </div> */}
-
         <Link href={`/post/${post.pid}`} passHref>
           <a className={styles.subTitle}>
             <span>{post.subTitle}</span>

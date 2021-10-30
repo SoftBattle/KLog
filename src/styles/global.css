@@ -39,6 +39,11 @@ body {
 
 .bytemd {
   height: 500px !important;
+  overflow: hidden;
+}
+
+.bytemd img {
+  max-width: 100% !important;
 }
 
 body {
