@@ -18,7 +18,6 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   const re = await api.post.queryPosts({pageIndex: 1, pageSize: 10, keyword: '', sort: 'ctime'})
   let posts: PostInfo[] = []
   let total: number
-  console.log(re)
   if(re.stat === 'ok') {
     posts = re.data.posts
     total = re.data.total || 0
@@ -53,7 +52,7 @@ const Index = (props) => {
     const init = async () => {
       const re = await api.post.queryPosts({pageIndex: 1, pageSize, keyword: '', sort: SORTMap[currentTab] as 'ctime' | 'views' })
       if(re.stat === 'ok') {
-        setPosts(ps => [...ps, ...re.data.posts])
+        setPosts(ps => [...re.data.posts])
       }
     }
     init()

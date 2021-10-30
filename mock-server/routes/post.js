@@ -14,7 +14,7 @@ router.post('/list', async (ctx) => {
       pageSize = 10,
       sort = 'ctime',
     } = ctx.request.body
-    const list = postInfoList.filter((post) => {
+    let list = postInfoList.filter((post) => {
       const temp = Object.values(post)
       return temp.some((k) => {
         return typeof k === 'string' && k.includes(keyword)
@@ -22,7 +22,9 @@ router.post('/list', async (ctx) => {
     })
     const length = list.length
     if(sort !== 'ctime') {
-      list.sort((a, b) => a.views - b.views)
+      list = list.sort((a, b) => {
+        return b.views - a.views
+      })
     }
     ctx.body = genOk({
       posts: list.splice(pageSize * (pageIndex - 1), pageSize),
