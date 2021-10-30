@@ -13,13 +13,14 @@ import { changeValue, changeType, SearchStore } from '../../store/search/actions
 import { Dispatch } from 'redux'
 import api from '../../services'
 
-const Header = ({ avatar, uid, nickname, token, setUser, keyword, changeKeywordValue }: {
+const Header = ({ avatar, uid, nickname, token, type = 'post', setUser, keyword, changeKeywordValue }: {
   avatar?: string
   uid?: string
   nickname?: string
   token?: string
   setUser: Function
   keyword: string
+  type: string
   changeKeywordValue: Function
 }) => {
   const [active, setActive] = useState(false)
@@ -40,7 +41,8 @@ const Header = ({ avatar, uid, nickname, token, setUser, keyword, changeKeywordV
     router.push({
       pathname: '/search',
       query: {
-        keyword
+        keyword,
+        type
       }
     })
   }

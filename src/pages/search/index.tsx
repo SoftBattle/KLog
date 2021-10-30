@@ -12,33 +12,50 @@ import { connect } from 'react-redux'
 import { changeType, changeValue, SearchStore } from '../../store/search/actions'
 import { Dispatch } from 'redux'
 
-const pageSize = 20
+const pageSize = 10
 const sort = 'views'
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { keyword, type='' } = ctx.query
-  const re = await api.post.queryPosts({
-    pageIndex: 1,
-    pageSize,
-    keyword: keyword as string,
-    sort
-  })
-  if(re.stat === 'ok') {
-    const posts = re.data.posts
-    const total= re.data.total
-    return {
-      props: {
-        users: [],
-        posts,
-        total
+  const { keyword, type = 'post' } = ctx.query
+  if(type === 'post') {
+    const re = await api.post.queryPosts({
+      pageIndex: 1,
+      pageSize,
+      keyword: keyword as string,
+      sort
+    })
+    if(re.stat === 'ok') {
+      const posts = re.data.posts
+      const total= re.data.total
+      return {
+        props: {
+          users: [],
+          posts,
+          total
+        }
+      }
+    }
+  } else {
+    const re = await api.user.queryUsers({
+      pageIndex: 1,
+      pageSize,
+      keyword: keyword as string,
+    })
+    if(re.stat === 'ok') {
+      const users = re.data.users
+      const total= re.data.total
+      return {
+        props: {
+          users,
+          posts: [],
+          total
+        }
       }
     }
   }
 }
 
 type SearchType = 'user' | 'post'
-
-// 改用分页吧，触底刷新需要改进
 
 const Search = (props: { 
   keyword: string
@@ -49,12 +66,18 @@ const Search = (props: {
   users: UserInfo[]
   total: number
 }) => {
-  // const [currentTab, setCurrentTab] = useState<SearchType>()
-  const currentTab = props.type
-  const [users, setUsers] = useState<UserInfo[]>(props.users || [])
+  const [users, setUsers] = useState<UserInfo[]>(() => {
+    return props.users || []
+  })
   const [posts, setPosts] = useState<PostInfo[]>(props.posts || [])
   const [pageIndex, setPageIndex] = useState(1)
   const [total, setTotal] = useState(props.total || 0)
+
+  useEffect(() => {
+    setUsers(props.users)
+    setPosts(props.posts)
+    setTotal(props.total)
+  }, [props.users, props.posts, props.total])
 
   const getMore = async (type: SearchType) => {
     if(type === 'post') {
@@ -65,8 +88,7 @@ const Search = (props: {
         sort
       })
       if(re.stat === 'ok') {
-        setPosts(posts.concat(re.data.posts))
-        // setTotal(re.data.total)
+        setPosts(re.data.posts)
       }
     } else {
       const re = await api.user.queryUsers({
@@ -75,8 +97,7 @@ const Search = (props: {
         keyword: props.keyword,
       })
       if(re.stat === 'ok') {
-        setUsers(users.concat(re.data.users))
-        // setTotal(re.data.total)
+        setUsers(re.data.users)
       }
     }
   }
@@ -93,14 +114,14 @@ const Search = (props: {
   const getUsers = async (params: {keyword: string, pageIndex: number, pageSize: number}) => {
     const re = await api.user.queryUsers(params)
     if(re.stat === 'ok') {
-      console.log(re.data.users)
+      console.log(re.data)
       setUsers(re.data.users)
       setTotal(re.data.total)
     }
   }
 
   const getList = () => {
-    switch(currentTab) {
+    switch(props.type) {
       case 'user':
         return users.map((user, idx) => <UserItem user={user} key={idx} />)
       default:
@@ -109,16 +130,21 @@ const Search = (props: {
   }
 
   useEffect(() => {
-    if(currentTab === 'user') {
+    if(pageIndex !== 1) return
+    if(props.type === 'user') {
       getUsers({pageIndex, pageSize, keyword: props.keyword})
     } else {
       getPosts({pageIndex, pageSize, keyword: props.keyword, sort})
     }
-  }, [pageIndex, currentTab])
+  }, [pageIndex, props.type])
 
+  useEffect(() => {
+    if(pageIndex > 1) {
+      getMore(props.type || 'post')
+    }
+  }, [pageIndex])
   return (
     <div className={styles.wrapper}>
-      {/* search {keyword} */}
       <div className={styles.tab}>
         <Tab 
           tabs={[
@@ -126,7 +152,6 @@ const Search = (props: {
               name: 'post',
               content: <div>文章</div>,
               onClick: async () => {
-                // setCurrentTab('post')
                 props.changeSearchType('post')
                 document.documentElement.scrollTop = 0
                 setPageIndex(1)
@@ -136,23 +161,22 @@ const Search = (props: {
               name: 'user',
               content: <div>用户</div>,
               onClick: async () => {
-                // setCurrentTab('user')
                 props.changeSearchType('user')
                 document.documentElement.scrollTop = 0
                 setPageIndex(1)
               }
             }
           ]} 
-          currentTab={currentTab}
+          currentTab={props.type}
           ></Tab>
       </div>
       <div className={styles.list}>
         {
-          getList()
+          (total === 0) && <div className={styles.empty}>什么也没搜到...</div> || getList()
         }
       </div>
       <div className={styles.pagi}>
-        <Pagination current={pageIndex} total={total} pageSize={20} onChange={(current) => {
+        <Pagination current={pageIndex} total={total} pageSize={pageSize} onChange={(current) => {
           setPageIndex(current)
           document.documentElement.scrollTop = 0
         }} />

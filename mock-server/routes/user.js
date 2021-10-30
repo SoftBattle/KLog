@@ -6,14 +6,6 @@ const router = new Router({
   prefix: '/api/user'
 })
 
-function getArrays(data, length) {
-  const re = []
-  for(let i = 0; i < length; i++) {
-    re.push(data)
-  }
-  return re
-}
-
 router.post('/follow', async ctx => {
   try {
     const token = ctx.cookies.get('token')
@@ -51,9 +43,10 @@ router.post('/search', async ctx => {
   try {
     const { keyword, pageSize = 10, pageIndex = 1 } = ctx.request.body
     const list = users.filter(user => user.uid.includes(keyword) || user.nickname.includes(keyword))
+    const length = list.length
     ctx.body = genOk({
-      posts: list.splice(pageSize * (pageIndex - 1), pageSize),
-      total: list.length
+      users: list.splice(pageSize * (pageIndex - 1), pageSize),
+      total: length
     })
   } catch (error) {
     ctx.body = genErr()
@@ -96,9 +89,10 @@ router.post('/posts', async ctx => {
   try {
     const { uid, pageSize = 10, pageIndex = 1 } = ctx.request.body
     const list = postInfoList.filter(post => post.author.uid === uid)
+    const length = list.length
     ctx.body = genOk({
       posts: list.splice(pageSize * (pageIndex - 1), pageSize),
-      total: list.length
+      total: length
     })
   } catch (error) {
     ctx.body = genErr()
@@ -109,10 +103,11 @@ router.post('/stars', async ctx => {
   try {
     const { uid, pageSize = 10, pageIndex = 1 } = ctx.request.body
     const list = postDetailList.filter(({ author, star }) => star)
+    const length = list.length
     console.log(list.length)
     ctx.body = genOk({
       posts: list.splice(pageSize * (pageIndex - 1), pageSize),
-      total: list.length
+      total: length
     })
   } catch (error) {
     ctx.body = genErr()

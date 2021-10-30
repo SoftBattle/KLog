@@ -11,23 +11,20 @@ const Pagination = ( props: {
 }) => {
   const total = props.total
   const pageSize = props.pageSize || 20
-  // const [current, setCurrent] = useState(props.current)
   const current = props.current
   const onChange = props.onChange
   const listSize = 5
   const totalSize = Math.ceil(total / pageSize)
   // 开始渲染页
   const startPage = Math.ceil(current / listSize) * listSize - listSize + 1
-
+  if(total < pageSize) return <div></div>
   return (
       <div className={styles.wrapper}>
         <ul>
           <button 
             className={styles.btn}
-            disabled={current === 1}
+            disabled={current <= 1}
             onClick={() => {
-              // prev
-              // setCurrent(() => current - 1 > 0 ? current - 1 : current)
               onChange(current - 1 > 0 ? current - 1 : current)
             }}>
               <IconPrev cn={styles.icon}></IconPrev>
@@ -46,10 +43,8 @@ const Pagination = ( props: {
           }
           <button 
             className={styles.btn}
-            disabled={current === totalSize}
+            disabled={current >= totalSize}
             onClick={() => {
-              // prev
-              // setCurrent(() => current + 1 > totalSize ? totalSize : current + 1)
               onChange(current + 1 > totalSize ? totalSize : current + 1)
             }}>
               <IconNext cn={styles.icon}></IconNext>
