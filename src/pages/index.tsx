@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect, useRef, useCallback } from 'react'
 import Tab from '../components/Tab'
 import { PostItem } from '../components/MarkDown'
-// import { usePosts } from '../hooks'
+import { useDebounceFn } from 'ahooks'
 import styles from './index.module.scss'
 import { GetServerSideProps } from 'next'
 import { PostInfo } from '../interface'
@@ -35,7 +35,7 @@ function useList(sort: 'ctime' | 'views') {
   const [total, setTotal] = useState(0)
   const [hasMore, setHasMore] = useState(false)
   const [pageIndex, setPageIndex] = useState(1)
-  const request = useCallback(async (pageIndex: number, pageSize: number, sort: 'ctime' | 'views') => {
+  const request = useCallback(async (pageIndex: number, pageSize: number, sort: 'ctime' | 'views', isInit = false) => {
     const { stat, data } = await api.post.queryPosts({
       pageIndex,
       pageSize,
@@ -43,9 +43,14 @@ function useList(sort: 'ctime' | 'views') {
       sort
     })
     if(stat === 'ok') {
-      setList(pre => [...pre, ...data.posts])
-      setTotal(data.total)
-      setHasMore(list.length < total)
+      if(!isInit) {
+        setHasMore(list.length + data.posts.length < total)
+        setList(pre => [...pre, ...data.posts])
+      } else {
+        setTotal(data.total)
+        setList(data.posts)
+        setHasMore(data.posts.length < data.total)
+      }
     }
   }, [list, total])
   const loadMore = useCallback(async () => {
@@ -58,10 +63,11 @@ function useList(sort: 'ctime' | 'views') {
     // 发生改变，重新初始化
     setList([])
     setPageIndex(1)
-    request(1, 10, sort)
+    request(1, 10, sort, true)
   }, [sort])
   return {
     list,
+    total,
     hasMore,
     loadMore
   }
@@ -73,12 +79,10 @@ const Index = (props) => {
   const pageSize = 10
   const [posts, setPosts] = useState<PostInfo[]>(props.posts || [])
   const [toBottom, setToBottom] = useState(false)
-  // const [total, setTotal] = useState(props.total || 0)
 
   async function request(pageIndex: number, pageSize: number, sort: 'ctime' | 'views') {
     const re = await api.post.queryPosts({pageIndex, pageSize, keyword: '', sort})
     if(re.stat === 'ok') {
-      // setTotal(t => re.data?.total || t)
       if(posts.length < re.data.total) {
         setPosts(ps => [...ps, ...re.data.posts])
         setPageIndex(idx => idx + 1)
@@ -156,7 +160,6 @@ const Index = (props) => {
       </div>
 
       <div className={styles.posts}>
-        {/* post显示区 */}
         {
           getPostsList()
         }

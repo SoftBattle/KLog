@@ -20,7 +20,7 @@ const CalendarCharts = ({ data, year, min, max, title }) => {
         formatter: function (params) {
           const value = params.value
           // value 格式 [date, num]
-          return value[0] + ': ' + value[1]
+          return value[0] + ': ' + value[1] + ' post.'
         }
       },
       visualMap: {
@@ -31,7 +31,7 @@ const CalendarCharts = ({ data, year, min, max, title }) => {
         left: "center",
         top: 65,
         inRange: {
-          color: ['#ebedf0', "#0c800f"],
+          color: ['#ffffff', "#0c800f"],
         },
       },
       calendar: [
@@ -39,7 +39,7 @@ const CalendarCharts = ({ data, year, min, max, title }) => {
           top: 120,
           left: 'center',
           cellSize: ["auto", 13],
-          // backgroundColor: '#ffffff',
+          backgroundColor: '#ffffff',
           range: year || new Date().getFullYear().toString(),
           itemStyle: {
             borderWidth: 2,
@@ -61,7 +61,11 @@ const CalendarCharts = ({ data, year, min, max, title }) => {
       ],
     };
     chart.setOption(option);
-  }, []);
+    return () => {
+      chart.clear()
+      chart.dispose()
+    }
+  }, [data, year]);
   return <div ref={ref} className={styles.chart}></div>;
 };
 

@@ -514,6 +514,7 @@ const Profile = ({ uid }) => {
   const [year, setYear] = useState<string>('')
   const getData = async () => {
     const re = await api.user.getUserActivity({uid})
+    console.log(re.data)
     if(re.stat === 'ok') {
       setData(re.data.list)
       setYear(re.data.year)
@@ -529,7 +530,7 @@ const Profile = ({ uid }) => {
           title="发帖活跃度"
           data={data}
           min={0}
-          max={10}
+          max={5}
           year={year}
         />
       </div>

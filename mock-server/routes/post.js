@@ -8,7 +8,7 @@ const router = new Router({
 
 router.post('/list', async ctx => {
   try {
-    const {keyword = '', pageIndex = 1, pageSize = 10} = ctx.request.body
+    const {keyword = '', pageIndex = 1, pageSize = 10, sort} = ctx.request.body
     const list = postInfoList.filter(post => {
       const temp = Object.values(post)
       return temp.some(k => {
